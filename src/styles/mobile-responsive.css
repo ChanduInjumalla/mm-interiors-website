@@ -305,15 +305,8 @@
   }
 
   /* Seamless Full-Viewport Modal Overlay on Mobile
-     Covers entire viewport with rich, uniform backdrop without any navbar split */
-  body.has-hero-modal-open .header,
-  body.has-hero-modal-open .floating-wa {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transition: opacity 0.25s ease, visibility 0.25s ease !important;
-  }
-
+     Mounted directly to body via portal, covering entire viewport from top: 0
+     over the header with the exact preferred opacity and blur */
   body.has-hero-modal-open {
     overflow: hidden !important;
   }
@@ -330,10 +323,10 @@
     width: 100dvw !important;
     height: 100vh !important;
     height: 100dvh !important;
-    z-index: 9999 !important;
-    background: rgba(12, 12, 10, 0.94) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
+    z-index: 99999 !important;
+    background: rgba(0, 0, 0, 0.72) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 1rem !important;
