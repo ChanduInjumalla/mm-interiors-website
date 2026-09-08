@@ -148,7 +148,7 @@ export default async function handler(req, res) {
                   </td>
                 </tr>
               </table>
-              <p style="margin:18px 0 0;color:#B8976A;font-size:12px;font-weight:600;">⚡ Call within 30 minutes for best conversion</p>
+              <p style="margin:18px 0 0;color:#8BA4BE;font-size:12px;font-weight:600;">MM Interiors &bull; Client Inquiry Notification</p>
             </td>
           </tr>
 
@@ -172,7 +172,42 @@ export default async function handler(req, res) {
 </body>
 </html>`;
 
+    // Plain-text alternative (crucial for anti-spam deliverability)
+    const textEmail = `
+MM INTERIORS - NEW CLIENT INQUIRY
+=================================
+Source: ${data.formName || 'Website Form'}
+Received: ${timestamp}
+
+CLIENT INFORMATION
+------------------
+Name: ${data.name || '—'}
+Phone: ${data.phone || '—'}
+Email: ${data.email || 'Not provided'}
+
+PROJECT DETAILS
+---------------
+Service: ${data.service || 'Not specified'}
+Property: ${data.propertyType || 'Not specified'}
+${data.bhk ? `BHK: ${data.bhk}\n` : ''}
+CLIENT MESSAGE
+--------------
+${data.message || 'No message provided'}
+
+CONTACT ACTIONS
+---------------
+Call: tel:${data.phone || ''}
+WhatsApp: https://wa.me/91${(data.phone || '').toString().replace(/\D/g, '')}
+
+--
+MM Interiors | Premium Interior Design Studio, Hyderabad
+https://mminterior.in | +91 7995659645
+`;
+
     // Send email via Resend
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'MM Interiors <onboarding@resend.dev>';
+    const subjectLine = `New Client Inquiry: ${data.name || 'Website Visitor'} - ${data.service || 'Interior Design'} | MM Interiors`;
+
     const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -180,11 +215,15 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'MM Interiors <onboarding@resend.dev>',
+        from: fromAddress,
         to: NOTIFY_EMAIL,
-        subject: `🔔 New ${data.formName || 'Website'} Enquiry — ${data.name || 'Visitor'} | ${data.service || 'Interior Design'}`,
+        subject: subjectLine,
         html: htmlEmail,
+        text: textEmail,
         reply_to: data.email || undefined,
+        headers: {
+          'X-Entity-Ref-ID': `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        },
       }),
     });
 
