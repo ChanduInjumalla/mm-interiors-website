@@ -1,0 +1,110 @@
+/* ============================================
+   FAQ PAGE LIVE SEARCH & TABS
+   ============================================ */
+
+.faq-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.faq-search-icon {
+  position: absolute;
+  left: 1.25rem;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.faq-search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 3.25rem;
+  font-size: 0.9375rem;
+  background: var(--color-bg-card, #fff);
+  border: 1.5px solid var(--color-border-light, rgba(0, 0, 0, 0.12));
+  border-radius: var(--radius-lg, 12px);
+  color: var(--color-text, #1F1F1D);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.faq-search-input:focus {
+  outline: none;
+  border-color: var(--color-gold, #B8976A);
+  box-shadow: 0 0 0 3px rgba(184, 151, 106, 0.2);
+}
+
+.faq-search-clear {
+  position: absolute;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-light, #888);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+}
+
+.faq-search-clear:hover {
+  color: var(--color-text, #1F1F1D);
+}
+
+/* Category Tabs */
+.faq-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.faq-tab {
+  padding: 0.5rem 1rem;
+  background: var(--color-bg-alt, #F9F8F5);
+  border: 1px solid var(--color-border-light, rgba(0, 0, 0, 0.08));
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text, #1F1F1D);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.faq-tab:hover {
+  border-color: var(--color-gold, #B8976A);
+}
+
+.faq-tab.is-active {
+  background: #1F1F1D;
+  color: #fff;
+  border-color: var(--color-gold, #B8976A);
+}
+
+.faq-results-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gold, #B8976A);
+  margin-bottom: 1.5rem;
+}
+
+.faq-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--color-bg-alt, #F9F8F5);
+  border-radius: var(--radius-lg, 12px);
+}
+
+.faq-empty h4 {
+  margin: 0 0 0.5rem;
+  color: var(--color-text, #1F1F1D);
+}
+
+.faq-empty p {
+  color: var(--color-text-light, #666);
+  font-size: 0.875rem;
+  margin: 0 0 1.25rem;
+}

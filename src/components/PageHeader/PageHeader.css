@@ -1,0 +1,46 @@
+/* ============================================
+   PageHeader — Simple left-aligned page title
+   Used on all pages except homepage.
+   ============================================ */
+
+.page-header {
+  padding: var(--space-4xl) 0 var(--space-2xl);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.page-header .container {
+  max-width: var(--container-width, 1200px);
+}
+
+.page-header__title {
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  max-width: 700px;
+}
+
+.page-header__desc {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-light);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: var(--space-xl);
+}
+
+.page-header .overline {
+  margin-bottom: var(--space-sm);
+}
+
+.page-header .btn {
+  margin-top: var(--space-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    padding: var(--space-3xl) 0 var(--space-xl);
+  }
+}

@@ -1,0 +1,151 @@
+/* ============================================
+   Hero Section — Clean, Professional, Bottom-Left
+   Premium interior design hero.
+   ============================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 540px;
+  overflow: hidden;
+}
+
+/* Background Image */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.hero__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2C3E50 0%, #34495E 30%, #3D5A73 60%, #1B3A5C 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: var(--fs-small);
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+/* Subtle bottom-left gradient — lets the photo breathe on the right */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.25) 0%,
+      transparent 50%
+    );
+}
+
+/* Content — pinned to bottom-left */
+.hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0 var(--container-padding) var(--space-4xl);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.hero__content .overline {
+  display: none;
+}
+
+.hero__title {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.12;
+  margin-bottom: var(--space-lg);
+  max-width: 600px;
+  letter-spacing: -0.025em;
+}
+
+.hero__description {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+  max-width: 440px;
+  font-weight: 400;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* CTA button inside hero */
+.hero__actions .btn--primary {
+  padding: 0.9rem 2.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  letter-spacing: 0.01em;
+}
+
+.hero__actions .btn--white {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.9rem 2.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.hero__actions .btn--white:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+    min-height: 480px;
+  }
+
+  .hero__content {
+    padding-bottom: var(--space-3xl);
+  }
+
+  .hero__title {
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

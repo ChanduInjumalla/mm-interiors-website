@@ -1,0 +1,215 @@
+/* ============================================
+   LANGUAGE SWITCHER COMPONENT
+   ============================================ */
+
+.lang-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 0.25rem;
+}
+
+/* Trigger Button */
+.lang-switcher__btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.55rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(184, 151, 106, 0.4);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.lang-switcher__btn:hover,
+.lang-switcher__btn.is-open {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #B8976A;
+  color: #fff;
+}
+
+.lang-switcher__btn:focus-visible {
+  outline: 2px solid #B8976A;
+  outline-offset: 2px;
+}
+
+.lang-switcher__globe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B8976A;
+}
+
+.lang-switcher__current-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.lang-switcher__chevron {
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.lang-switcher__btn.is-open .lang-switcher__chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Dropdown Menu */
+.lang-switcher__dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 190px;
+  background: #1F1F1D;
+  border: 1px solid rgba(184, 151, 106, 0.35);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  padding: 0.4rem;
+  z-index: 1050;
+  animation: langDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes langDropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-switcher__header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #B8976A;
+  padding: 0.35rem 0.65rem 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.25rem;
+}
+
+.lang-switcher__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lang-switcher__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.lang-switcher__option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.lang-switcher__option.is-active {
+  background: rgba(184, 151, 106, 0.15);
+  color: #fff;
+}
+
+.lang-switcher__option-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-switcher__option-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.05rem;
+}
+
+.lang-switcher__option-native {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.lang-switcher__option-en {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.1;
+}
+
+.lang-switcher__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   HIDE GOOGLE TRANSLATE DEFAULT UGLY BANNERS
+   ============================================ */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.skiptranslate iframe {
+  display: none !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 1080px) {
+  .header__mobile .lang-switcher {
+    margin: 1rem 0 0 0;
+    width: 100%;
+  }
+
+  .header__mobile .lang-switcher__btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .header__mobile .lang-switcher__dropdown {
+    position: static;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}

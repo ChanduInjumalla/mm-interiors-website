@@ -1,0 +1,378 @@
+/* ============================================
+   HERO CONSULTATION CARD — ARCHITECTURAL LEAD FORM
+   ============================================ */
+
+/* Reopen / Info Floating Button */
+.hero-card-trigger {
+  position: absolute;
+  right: calc(var(--container-padding) + 1rem);
+  top: calc(var(--header-height, 64px) + 2rem);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(31, 31, 29, 0.92);
+  border: 1px solid rgba(184, 151, 106, 0.6);
+  color: #fff;
+  padding: 0.65rem 1.15rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: heroTriggerFadeIn 0.4s ease-out;
+}
+
+.hero-card-trigger:hover {
+  background: #1F1F1D;
+  border-color: #B8976A;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.hero-card-trigger__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B8976A;
+}
+
+.hero-card-trigger__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+}
+
+/* Card Wrapper (Right-side positioning) */
+.hero-card-wrapper {
+  position: absolute;
+  right: calc(var(--container-padding) + 1.5rem);
+  top: calc(var(--header-height, 64px) + 1.5rem);
+  bottom: 2rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  animation: heroCardSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Card Container */
+.hero-card {
+  pointer-events: auto;
+  position: relative;
+  width: 380px;
+  max-width: 100%;
+  max-height: calc(100vh - var(--header-height, 64px) - 3.5rem);
+  overflow-y: auto;
+  background: rgba(31, 31, 29, 0.94);
+  border: 1px solid rgba(184, 151, 106, 0.35);
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem 1.65rem 1.4rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #fff;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(184, 151, 106, 0.3) transparent;
+}
+
+.hero-card::-webkit-scrollbar {
+  width: 4px;
+}
+.hero-card::-webkit-scrollbar-thumb {
+  background: rgba(184, 151, 106, 0.3);
+  border-radius: 4px;
+}
+
+/* Close Button */
+.hero-card__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.35rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.hero-card__close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-card__close:focus-visible {
+  outline: 2px solid #B8976A;
+  outline-offset: 2px;
+}
+
+/* Header */
+.hero-card__header {
+  margin-bottom: 1.15rem;
+  padding-right: 1.5rem;
+}
+
+.hero-card__badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #B8976A;
+  margin-bottom: 0.35rem;
+}
+
+.hero-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.01em;
+}
+
+.hero-card__subtitle {
+  font-size: 0.775rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Fields */
+.hero-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+}
+
+.hero-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero-card__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-card__req {
+  color: #B8976A;
+  margin-left: 0.1rem;
+}
+
+.hero-card__opt {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  text-transform: none;
+  font-size: 0.65rem;
+}
+
+.hero-card__input,
+.hero-card__select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8125rem;
+  color: #fff;
+  font-family: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.hero-card__input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.hero-card__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23B8976A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.hero-card__select option {
+  background: #1F1F1D;
+  color: #fff;
+}
+
+.hero-card__input:focus,
+.hero-card__select:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #B8976A;
+  box-shadow: 0 0 0 2px rgba(184, 151, 106, 0.25);
+}
+
+.hero-card__input.is-error {
+  border-color: #e57373;
+}
+
+.hero-card__error {
+  font-size: 0.6875rem;
+  color: #ff8a80;
+  margin-top: 0.1rem;
+}
+
+/* Submit CTA */
+.hero-card__submit {
+  width: 100%;
+  padding: 0.75rem 1.25rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  text-align: center;
+  justify-content: center;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Success State */
+.hero-card__success {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.hero-card__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(184, 151, 106, 0.15);
+  border: 1px solid rgba(184, 151, 106, 0.4);
+  margin-bottom: 1rem;
+}
+
+.hero-card__success-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+}
+
+.hero-card__success-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin: 0 0 1.25rem 0;
+}
+
+.hero-card__success-btn {
+  padding: 0.6rem 2rem !important;
+  font-size: 0.875rem !important;
+}
+
+/* Keyframe Animations */
+@keyframes heroCardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroTriggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-card-wrapper,
+  .hero-card-trigger {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+@media (max-width: 1200px) {
+  .hero-card {
+    width: 340px;
+    padding: 1.25rem 1.4rem;
+  }
+  .hero-card__title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-card-wrapper {
+    position: static;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0 1rem 2rem;
+  }
+  .hero-card {
+    width: 100%;
+    max-width: 440px;
+    max-height: none;
+  }
+  .hero-card-trigger {
+    right: 1rem;
+    top: calc(var(--header-height, 64px) + 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-card-wrapper {
+    position: fixed;
+    inset: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    pointer-events: auto;
+  }
+
+  .hero-card {
+    width: 100%;
+    max-width: 380px;
+    max-height: 85vh;
+    padding: 1.25rem;
+  }
+
+  .hero-card-trigger {
+    top: auto;
+    bottom: 4.5rem;
+    right: 1rem;
+    padding: 0.55rem 1rem;
+  }
+}

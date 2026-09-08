@@ -1,0 +1,128 @@
+/* Service Page Layout */
+
+.service-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+
+.service-intro__content .overline {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.service-intro__content h2 {
+  margin-bottom: var(--space-md);
+}
+
+.service-intro__content p {
+  color: var(--color-text-light);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+.service-intro__image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Features Grid */
+.service-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+.service-feature {
+  padding: var(--space-xl);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.service-feature__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-light);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  color: var(--color-accent);
+  font-size: 1.25rem;
+}
+
+.service-feature h4 {
+  margin-bottom: var(--space-sm);
+}
+
+.service-feature p {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+
+/* Types/Options Grid */
+.service-types {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+.service-type-card {
+  display: flex;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+  align-items: start;
+}
+
+.service-type-card__number {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--color-gold);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.service-type-card h4 {
+  margin-bottom: var(--space-sm);
+}
+
+.service-type-card p {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .service-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .service-intro {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .service-intro__image {
+    order: -1;
+  }
+
+  .service-features {
+    grid-template-columns: 1fr;
+  }
+
+  .service-types {
+    grid-template-columns: 1fr;
+  }
+}

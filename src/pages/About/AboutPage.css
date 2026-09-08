@@ -1,0 +1,33 @@
+/* About Page */
+.about-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.about-story__content .overline { display: block; margin-bottom: var(--space-sm); }
+.about-story__content h2 { margin-bottom: var(--space-md); }
+.about-story__content p { color: var(--color-text-light); font-size: var(--fs-body-lg); }
+
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.about-value {
+  padding: var(--space-2xl);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.about-value h3 { margin-bottom: var(--space-sm); color: var(--color-accent); }
+.about-value p { font-size: var(--fs-small); color: var(--color-text-light); margin-bottom: 0; }
+
+@media (max-width: 768px) {
+  .about-story { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .about-story__image { order: -1; }
+  .about-values { grid-template-columns: 1fr; }
+}

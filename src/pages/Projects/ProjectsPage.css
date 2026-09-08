@@ -1,0 +1,253 @@
+/* ============================================
+   PROJECTS SHOWCASE PAGE (ARCHITECTURAL STYLE)
+   ============================================ */
+
+.projects-page {
+  padding-bottom: var(--space-2xl, 2rem);
+}
+
+/* Projects Page Header */
+.projects-header {
+  text-align: center;
+  padding: 3rem 1.5rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.projects-header__overline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent, #B8976A);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.projects-header__title {
+  font-size: clamp(1.85rem, 3vw, 2.35rem);
+  font-weight: 700;
+  color: var(--color-text, #1F1F1D);
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.projects-header__divider {
+  width: 48px;
+  height: 2px;
+  background: var(--color-accent, #B8976A);
+  margin: 1rem auto 1.25rem;
+  border-radius: 2px;
+}
+
+.projects-header__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-light, #555555);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* Category Filter Pills */
+.projects-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.75rem 0 3rem;
+}
+
+.projects-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.3rem;
+  font-size: 0.71875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 9999px;
+  border: 1px solid #E2E1DC;
+  background: #FFFFFF;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.projects-filter-btn:hover {
+  border-color: var(--color-accent, #B8976A);
+  color: var(--color-accent, #B8976A);
+  transform: translateY(-1px);
+}
+
+.projects-filter-btn.is-active {
+  background: var(--color-accent, #B8976A);
+  border-color: var(--color-accent, #B8976A);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(184, 151, 106, 0.3);
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Project Card */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09);
+  border-color: #DDD;
+}
+
+/* Image Container */
+.project-card__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #F5F4F0;
+}
+
+.project-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card__img {
+  transform: scale(1.05);
+}
+
+/* Image Pill Badge (Design Inspiration) */
+.project-card__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  background: rgba(26, 26, 24, 0.85);
+  color: #FFFFFF;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Body */
+.project-card__body {
+  padding: 1.5rem 1.6rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card__category {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent, #B8976A);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.project-card__title {
+  font-family: inherit;
+  font-size: 1.1875rem;
+  font-weight: 600;
+  color: var(--color-text, #1F1F1D);
+  margin: 0 0 0.5rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .project-card__title {
+  color: var(--color-accent, #B8976A);
+}
+
+.project-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-light, #666666);
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+}
+
+.project-card__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid #F0EFEA;
+}
+
+.project-card__location {
+  font-size: 0.75rem;
+  color: var(--color-text-light, #888888);
+  font-weight: 500;
+}
+
+.project-card__link-text {
+  font-size: 0.78125rem;
+  font-weight: 600;
+  color: var(--color-accent, #B8976A);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover .project-card__link-text {
+  transform: translateX(3px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .projects-filters {
+    gap: 0.4rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .projects-filter-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.6875rem;
+  }
+}
