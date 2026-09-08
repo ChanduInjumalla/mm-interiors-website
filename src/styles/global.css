@@ -122,7 +122,7 @@
   --z-mobile-bar: 500;
   
   /* Header */
-  --header-height: 64px;
+  --header-height: 68px;
   --mobile-bar-height: 60px;
 }
 
@@ -152,10 +152,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  padding-bottom: 0;
 }
 
-body {
-  padding-bottom: 0;
+/* Page Shell — Inner pages start after fixed navigation bar */
+.main--home {
+  padding-top: 0;
+}
+
+.main--inner {
+  padding-top: var(--header-height, 68px);
+}
+
+.main--inner div[style*="marginTop: 'var(--header-height)'"],
+.main--inner div[style*="margin-top: var(--header-height)"],
+.main--inner div[style*="margin-top:var(--header-height)"] {
+  margin-top: 0 !important;
 }
 
 img, video {

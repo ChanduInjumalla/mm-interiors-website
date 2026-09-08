@@ -128,12 +128,15 @@ function PageLoader() {
  * AppLayout — Global shell with Header, Footer, MobileBottomBar
  */
 function AppLayout() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
     <>
       <ScrollToTop />
       <PageTracker />
       <Header />
-      <main id="main-content">
+      <main id="main-content" className={isHomePage ? 'main--home' : 'main--inner'}>
         <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>
