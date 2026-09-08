@@ -18,8 +18,11 @@ export async function submitLeadForm(data, formName = 'Lead Form') {
     timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
   };
 
+  console.log('[FormSubmit] ACCESS_KEY present:', !!ACCESS_KEY, 'Key starts with:', ACCESS_KEY?.substring(0, 8));
+
   if (ACCESS_KEY) {
     payload.access_key = ACCESS_KEY;
+    console.log('[FormSubmit] Sending to Web3Forms...', JSON.stringify(payload));
     try {
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
@@ -30,13 +33,13 @@ export async function submitLeadForm(data, formName = 'Lead Form') {
         body: JSON.stringify(payload),
       });
       const result = await response.json();
+      console.log('[FormSubmit] Web3Forms response:', JSON.stringify(result));
       if (!result.success) {
         console.warn('[FormSubmit] Web3Forms response error:', result);
       }
       return { success: true, result };
     } catch (err) {
       console.error('[FormSubmit] Network error:', err);
-      // Fallback: still treat as success locally so user sees confirmation
       return { success: true, offline: true };
     }
   }
