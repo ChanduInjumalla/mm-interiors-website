@@ -1,11 +1,3 @@
-/**
- * MM Interiors — Enterprise Lead Notification Engine (Resend API)
- *
- * Sends ultra-luxury, MNC-grade HTML inquiry dossiers to mminterior7995@gmail.com
- * Designed with architectural aesthetics, champagne gold accents, real interior
- * photography hero, executive KPI metrics, and 1-tap WhatsApp & Call actions.
- */
-
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -20,191 +12,118 @@ export default async function handler(req, res) {
   }
 
   try {
-    const data = req.body || {};
-    const timestamp = new Date().toLocaleString('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      dateStyle: 'full',
-      timeStyle: 'short',
-    });
+    const data = req.body;
+    const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-    const clientName = (data.name || 'Website Visitor').trim();
-    const rawPhone = (data.phone || '').toString().trim();
-    const cleanPhone = rawPhone.replace(/\D/g, '');
-    const clientPhone = rawPhone || 'Not provided';
-    const clientEmail = (data.email || '').trim();
-    const clientService = data.service || 'Full Home Interiors';
-    const clientProperty = data.propertyType || 'Apartment / Residence';
-    const clientBhk = data.bhk || '';
-    const clientMessage = (data.message || '').trim() || 'Client requested a callback and consultation regarding interior design planning.';
-    const formSource = data.formName || 'Website Consultation';
-
-    // WhatsApp quick reply URL with prefilled greeting
-    const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
-    const waText = encodeURIComponent(
-      `Hello ${clientName}, this is MM Interiors Hyderabad. Thank you for reaching out regarding your ${clientService} project. When would be a convenient time for a brief discussion?`
-    );
-    const whatsappUrl = `https://wa.me/${waPhone}?text=${waText}`;
-    const telUrl = `tel:+91${cleanPhone.length === 10 ? cleanPhone : cleanPhone.replace(/^91/, '')}`;
-
-    // Luxury Architectural Interior Background (Real 4K photography, NOT cartoon/AI)
-    const heroBgImg = 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80';
-
-    const htmlEmail = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+    // Build the beautiful HTML email
+    const htmlEmail = `
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Client Dossier — MM Interiors</title>
-  <!--[if mso]>
-  <style type="text/css">
-    body, table, td, p, a { font-family: Arial, sans-serif !important; }
-  </style>
-  <![endif]-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0;padding:0;background-color:#080B10;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
-
-  <!-- OUTER CONTAINER -->
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#080B10;padding:30px 10px 50px;">
+<body style="margin:0;padding:0;background-color:#f0f0f0;font-family:'Segoe UI',Roboto,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0;padding:30px 0;">
     <tr>
       <td align="center">
-        <!-- 640px MAIN DOSSIER CARD -->
-        <table width="640" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;width:100%;background-color:#0E131F;border-radius:16px;overflow:hidden;border:1px solid #1F293D;box-shadow:0 25px 50px -12px rgba(0,0,0,0.7);">
-
-          <!-- 1. LUXURY HERO BANNER WITH REAL ARCHITECTURAL INTERIOR BACKGROUND -->
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+          
+          <!-- HEADER -->
           <tr>
-            <td background="${heroBgImg}" bgcolor="#0D1524" style="background-image:url('${heroBgImg}');background-size:cover;background-position:center;padding:0;">
-              <!-- Gradient Scrim for high-contrast enterprise readability -->
-              <div style="background:linear-gradient(180deg, rgba(8,11,16,0.82) 0%, rgba(14,19,31,0.96) 88%, #0E131F 100%);padding:42px 36px 32px;text-align:center;">
+            <td style="background: linear-gradient(135deg, #1B3A5C 0%, #0D2137 100%); padding:35px 40px; border-radius:12px 12px 0 0; text-align:center;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="text-align:center;">
+                    <div style="width:60px;height:60px;background:#B8976A;border-radius:50%;margin:0 auto 15px;line-height:60px;font-size:24px;color:#fff;font-weight:bold;">MM</div>
+                    <h1 style="margin:0;color:#B8976A;font-size:28px;font-weight:700;letter-spacing:1px;">MM INTERIORS</h1>
+                    <p style="margin:8px 0 0;color:#8BA4BE;font-size:13px;letter-spacing:2px;text-transform:uppercase;">Premium Interior Design Studio</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- NOTIFICATION BADGE -->
+          <tr>
+            <td style="background:#fff;padding:25px 40px 0;text-align:center;">
+              <div style="display:inline-block;background:linear-gradient(135deg, #B8976A 0%, #D4AF7A 100%);color:#fff;padding:8px 24px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+                🔔 New ${data.formName || 'Website'} Enquiry
+              </div>
+              <h2 style="margin:18px 0 5px;color:#1B3A5C;font-size:22px;font-weight:600;">New Client Enquiry Received!</h2>
+              <p style="margin:0 0 5px;color:#7A8A9E;font-size:14px;">${timestamp}</p>
+            </td>
+          </tr>
+
+          <!-- CLIENT DETAILS CARD -->
+          <tr>
+            <td style="background:#fff;padding:20px 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E8ECF1;border-radius:10px;overflow:hidden;">
                 
-                <!-- TOP BRAND BADGE -->
-                <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                  <tr>
-                    <td align="center">
-                      <!-- Geometric Gold Monogram Emblem -->
-                      <div style="display:inline-block;width:58px;height:58px;line-height:58px;border-radius:14px;background:linear-gradient(135deg, #E6CA65 0%, #B8860B 50%, #996515 100%);box-shadow:0 8px 20px rgba(212,175,55,0.3);text-align:center;margin-bottom:14px;">
-                        <span style="font-family:'Georgia',serif;font-size:24px;font-weight:bold;color:#0E131F;letter-spacing:1px;">MM</span>
-                      </div>
-                      
-                      <!-- Brand Heading -->
-                      <h1 style="margin:0;font-family:'Georgia','Times New Roman',serif;font-size:26px;font-weight:700;letter-spacing:4px;color:#F5E7C8;text-transform:uppercase;">
-                        MM INTERIORS
-                      </h1>
-                      <p style="margin:6px 0 16px;font-size:11px;font-weight:600;letter-spacing:2.5px;color:#9EABB8;text-transform:uppercase;">
-                        Architecture &bull; Bespoke Residences &bull; Hyderabad
-                      </p>
-
-                      <!-- Priority Status Pill -->
-                      <div style="display:inline-block;background:rgba(212,175,55,0.14);border:1px solid rgba(212,175,55,0.45);border-radius:50px;padding:6px 20px;">
-                        <span style="color:#F0D078;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">
-                          ★ NEW HIGH-PRIORITY INQUIRY DOSSIER
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-
-              </div>
-            </td>
-          </tr>
-
-          <!-- 2. EXECUTIVE KPI DASHBOARD BAR -->
-          <tr>
-            <td style="padding:0 30px;background-color:#0E131F;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#141B2D;border-radius:12px;border:1px solid #222D42;margin-top:-10px;">
+                <!-- Section Header -->
                 <tr>
-                  <!-- Metric 1: Source -->
-                  <td width="33%" align="center" style="padding:16px 10px;border-right:1px solid #222D42;">
-                    <div style="font-size:10px;font-weight:700;color:#7A8A9E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;">INQUIRY CHANNEL</div>
-                    <div style="font-size:13px;font-weight:700;color:#FFFFFF;">${formSource}</div>
-                  </td>
-                  <!-- Metric 2: Service -->
-                  <td width="34%" align="center" style="padding:16px 10px;border-right:1px solid #222D42;">
-                    <div style="font-size:10px;font-weight:700;color:#7A8A9E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;">SCOPE OF WORK</div>
-                    <div style="font-size:13px;font-weight:700;color:#E5C07B;">${clientService}</div>
-                  </td>
-                  <!-- Metric 3: Response Target -->
-                  <td width="33%" align="center" style="padding:16px 10px;">
-                    <div style="font-size:10px;font-weight:700;color:#7A8A9E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;">TARGET SLA</div>
-                    <div style="font-size:13px;font-weight:700;color:#38D39F;">⚡ 15-Min Response</div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- 3. CLIENT PROFILE & DETAILS -->
-          <tr>
-            <td style="padding:24px 30px 10px;background-color:#0E131F;">
-              
-              <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#D4AF37;text-transform:uppercase;margin-bottom:12px;">
-                PROSPECT OVERVIEW
-              </div>
-
-              <!-- Main Table -->
-              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#131A2B;border-radius:12px;border:1px solid #202B40;overflow:hidden;">
-                
-                <!-- Client Name -->
-                <tr>
-                  <td width="36%" style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Client Name
-                  </td>
-                  <td width="64%" style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:16px;font-weight:700;color:#FFFFFF;">
-                    ${clientName}
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">👤 CLIENT INFORMATION</span>
                   </td>
                 </tr>
 
-                <!-- Direct Contact Phone -->
+                <!-- Name -->
                 <tr>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Phone Number
-                  </td>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;">
-                    <a href="${telUrl}" style="font-size:16px;font-weight:700;color:#E5C07B;text-decoration:none;letter-spacing:0.5px;">
-                      ${clientPhone}
-                    </a>
-                    <span style="display:inline-block;margin-left:10px;background:rgba(56,211,159,0.15);color:#38D39F;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;">
-                      Verified
-                    </span>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Name</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;font-weight:600;border-bottom:1px solid #F0F2F5;">${data.name || '—'}</td>
+                </tr>
+
+                <!-- Phone -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Phone</td>
+                  <td style="padding:14px 20px;border-bottom:1px solid #F0F2F5;">
+                    <a href="tel:${data.phone || ''}" style="color:#1B3A5C;font-size:15px;font-weight:600;text-decoration:none;">${data.phone || '—'}</a>
                   </td>
                 </tr>
 
-                <!-- Email Address -->
+                <!-- Email -->
                 <tr>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Email Address
-                  </td>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:14px;color:#CBD5E1;">
-                    ${clientEmail ? `<a href="mailto:${clientEmail}" style="color:#CBD5E1;text-decoration:none;font-weight:600;">${clientEmail}</a>` : '<span style="color:#5D6D82;font-style:italic;">Not provided (Direct phone inquiry)</span>'}
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Email</td>
+                  <td style="padding:14px 20px;border-bottom:1px solid #F0F2F5;">
+                    <a href="mailto:${data.email || ''}" style="color:#1B3A5C;font-size:15px;text-decoration:none;">${data.email || 'Not provided'}</a>
                   </td>
                 </tr>
 
-                <!-- Property Specifications -->
+                <!-- Project Details Header -->
                 <tr>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Property & Layout
-                  </td>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:14px;font-weight:600;color:#FFFFFF;">
-                    ${clientProperty} ${clientBhk ? `<span style="display:inline-block;margin-left:8px;background:#24324D;color:#E5C07B;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;">${clientBhk}</span>` : ''}
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;border-top:1px solid #E8ECF1;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">🏗️ PROJECT DETAILS</span>
                   </td>
                 </tr>
 
-                <!-- Location / Market -->
+                <!-- Service -->
                 <tr>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Target Market
-                  </td>
-                  <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:14px;color:#CBD5E1;">
-                    Hyderabad &bull; Telangana, India
-                  </td>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Service</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.service || 'Not specified'}</td>
                 </tr>
 
-                <!-- Timestamp -->
+                <!-- Property Type -->
                 <tr>
-                  <td style="padding:15px 20px;font-size:12px;font-weight:700;letter-spacing:0.8px;color:#8595A8;text-transform:uppercase;">
-                    Dispatch Time
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Property</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.propertyType || 'Not specified'}</td>
+                </tr>
+
+                <!-- BHK -->
+                ${data.bhk ? `
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">BHK</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.bhk}</td>
+                </tr>` : ''}
+
+                <!-- Message -->
+                <tr>
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;border-top:1px solid #E8ECF1;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">💬 CLIENT MESSAGE</span>
                   </td>
-                  <td style="padding:15px 20px;font-size:13px;color:#8EA0B6;">
-                    ${timestamp}
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding:18px 20px;color:#2C3E50;font-size:15px;line-height:1.6;">
+                    ${data.message || 'No message provided'}
                   </td>
                 </tr>
 
@@ -212,82 +131,37 @@ export default async function handler(req, res) {
             </td>
           </tr>
 
-          <!-- 4. CLIENT BRIEF / MESSAGE BOX -->
+          <!-- ACTION BUTTONS -->
           <tr>
-            <td style="padding:18px 30px;background-color:#0E131F;">
-              <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#D4AF37;text-transform:uppercase;margin-bottom:10px;">
-                CLIENT REQUIREMENT STATEMENT
-              </div>
-              <div style="background-color:#141C2E;border-left:4px solid #D4AF37;border-radius:0 10px 10px 0;padding:18px 22px;border-top:1px solid #202B40;border-right:1px solid #202B40;border-bottom:1px solid #202B40;">
-                <p style="margin:0;color:#F1F5F9;font-size:15px;line-height:1.6;font-style:italic;">
-                  &ldquo;${clientMessage}&rdquo;
-                </p>
-              </div>
-            </td>
-          </tr>
-
-          <!-- 5. MNC EXECUTIVE ACTION PANEL (ONE-TOUCH FAST CONNECT) -->
-          <tr>
-            <td style="padding:12px 30px 32px;background-color:#0E131F;">
-              <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#D4AF37;text-transform:uppercase;margin-bottom:14px;text-align:center;">
-                INSTANT EXECUTIVE ACTIONS
-              </div>
-
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <td style="background:#fff;padding:15px 40px 30px;text-align:center;">
+              <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <!-- Button 1: WhatsApp Chat with Pre-filled Message -->
-                  <td width="48%" align="center" style="padding-right:8px;">
-                    <a href="${whatsappUrl}" target="_blank" style="display:block;background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);color:#FFFFFF;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(37,211,102,0.25);">
-                      💬 Connect on WhatsApp &rarr;
+                  <td style="padding:5px;" align="center">
+                    <a href="tel:${data.phone || ''}" style="display:inline-block;background:#1B3A5C;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:0.5px;">
+                      📞 Call Client Now
                     </a>
                   </td>
-
-                  <!-- Button 2: Direct Phone Call -->
-                  <td width="48%" align="center" style="padding-left:8px;">
-                    <a href="${telUrl}" style="display:block;background:linear-gradient(135deg, #E6CA65 0%, #B8860B 100%);color:#0E131F;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(212,175,55,0.25);">
-                      📞 Call ${clientName.split(' ')[0]} Now
+                  <td style="padding:5px;" align="center">
+                    <a href="https://wa.me/91${(data.phone || '').toString().replace(/\D/g, '')}" style="display:inline-block;background:#25D366;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:0.5px;">
+                      💬 WhatsApp
                     </a>
                   </td>
                 </tr>
               </table>
-
-              <div style="text-align:center;margin-top:14px;">
-                <span style="font-size:11px;color:#8595A8;font-weight:600;">
-                  ⚡ Tip: Responding within 15 minutes increases high-ticket conversion by up to 390%.
-                </span>
-              </div>
+              <p style="margin:18px 0 0;color:#B8976A;font-size:12px;font-weight:600;">⚡ Call within 30 minutes for best conversion</p>
             </td>
           </tr>
 
-          <!-- 6. ENTERPRISE STUDIO SIGNATURE & COMPLIANCE FOOTER -->
+          <!-- FOOTER -->
           <tr>
-            <td style="background-color:#090D15;padding:30px 36px;border-top:1px solid #1A2335;text-align:center;">
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td align="center">
-                    <p style="margin:0 0 4px;font-family:'Georgia',serif;font-size:15px;font-weight:700;letter-spacing:2px;color:#F5E7C8;">
-                      MM INTERIORS
-                    </p>
-                    <p style="margin:0 0 14px;font-size:11px;color:#7A8A9E;letter-spacing:1px;text-transform:uppercase;">
-                      Premium Architectural & Bespoke Living &bull; Hyderabad, India
-                    </p>
-
-                    <!-- Quick Links -->
-                    <div style="font-size:12px;color:#8595A8;margin-bottom:18px;">
-                      <a href="https://mminterior.in" style="color:#D4AF37;text-decoration:none;font-weight:600;">mminterior.in</a>
-                      <span style="color:#3A4A60;margin:0 10px;">|</span>
-                      <a href="tel:+917995659645" style="color:#CBD5E1;text-decoration:none;font-weight:600;">+91 7995659645</a>
-                      <span style="color:#3A4A60;margin:0 10px;">|</span>
-                      <a href="mailto:mminterior7995@gmail.com" style="color:#CBD5E1;text-decoration:none;font-weight:600;">mminterior7995@gmail.com</a>
-                    </div>
-
-                    <!-- Enterprise Security Disclaimer -->
-                    <p style="margin:0;font-size:10px;line-height:1.5;color:#4F5E73;">
-                      CONFIDENTIAL: This transmission contains proprietary lead information dispatched automatically by the MM Interiors client acquisition system. Intended solely for authorized interior design personnel.
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td style="background:linear-gradient(135deg, #1B3A5C 0%, #0D2137 100%);padding:25px 40px;border-radius:0 0 12px 12px;text-align:center;">
+              <p style="margin:0 0 5px;color:#B8976A;font-size:14px;font-weight:600;">MM Interiors</p>
+              <p style="margin:0 0 10px;color:#8BA4BE;font-size:12px;">Premium Interior Design Studio, Hyderabad</p>
+              <div style="border-top:1px solid #2A4F73;padding-top:12px;margin-top:8px;">
+                <a href="https://mminterior.in" style="color:#B8976A;font-size:12px;text-decoration:none;">mminterior.in</a>
+                <span style="color:#4A6A8A;margin:0 8px;">|</span>
+                <a href="tel:+917995659645" style="color:#8BA4BE;font-size:12px;text-decoration:none;">+91 7995659645</a>
+              </div>
             </td>
           </tr>
 
@@ -295,45 +169,35 @@ export default async function handler(req, res) {
       </td>
     </tr>
   </table>
-
 </body>
 </html>`;
 
-    // Dispatch via Resend API
+    // Send email via Resend
     const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
         from: 'MM Interiors <onboarding@resend.dev>',
         to: NOTIFY_EMAIL,
-        subject: `★ Client Dossier: ${clientName} — ${clientService} (${clientBhk || clientProperty})`,
+        subject: `🔔 New ${data.formName || 'Website'} Enquiry — ${data.name || 'Visitor'} | ${data.service || 'Interior Design'}`,
         html: htmlEmail,
-        reply_to: clientEmail || undefined,
+        reply_to: data.email || undefined,
       }),
     });
 
     const result = await resendResponse.json();
 
     if (!resendResponse.ok) {
-      console.error('[Resend Error]', result);
+      console.error('Resend error:', result);
       return res.status(500).json({ success: false, error: result });
     }
 
-    return res.status(200).json({
-      success: true,
-      messageId: result.id,
-      dossier: {
-        name: clientName,
-        phone: clientPhone,
-        service: clientService,
-        timestamp,
-      },
-    });
+    return res.status(200).json({ success: true, messageId: result.id });
   } catch (error) {
-    console.error('[API Submit-Form Exception]', error);
+    console.error('Email send error:', error);
     return res.status(500).json({ success: false, error: error.message });
   }
 }
