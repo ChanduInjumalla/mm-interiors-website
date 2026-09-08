@@ -1,53 +1,5 @@
-/* Mobile Bottom Bar */
+/* Mobile Bottom Bar — HIDDEN */
 
 .mobile-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: var(--z-mobile-bar);
-  background: var(--color-bg-card);
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  align-items: stretch;
-  height: var(--mobile-bar-height);
-  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-bar__item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-size: 0.6875rem;
-  font-weight: var(--fw-medium);
-  color: var(--color-text);
-  text-decoration: none;
-  transition: color var(--transition-fast), background-color var(--transition-fast);
-  border-right: 1px solid var(--color-border-light);
-}
-
-.mobile-bar__item:last-child {
-  border-right: none;
-}
-
-.mobile-bar__item:active {
-  background: var(--color-bg-alt);
-}
-
-.mobile-bar__item--whatsapp {
-  color: #25D366;
-}
-
-.mobile-bar__item--quote {
-  color: var(--color-accent);
-  font-weight: var(--fw-semibold);
-}
-
-@media (min-width: 769px) {
-  .mobile-bar {
-    display: none;
-  }
+  display: none !important;
 }

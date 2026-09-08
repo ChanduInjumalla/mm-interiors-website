@@ -154,15 +154,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Prevent content from being hidden behind mobile bottom bar */
 body {
   padding-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  body {
-    padding-bottom: var(--mobile-bar-height);
-  }
 }
 
 img, video {
