@@ -8,7 +8,7 @@
  */
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || 'a57e2c11-0d14-4495-92a1-69e6b0958eca';
+const ACCESS_KEY = 'a57e2c11-0d14-4495-92a1-69e6b0958eca';
 
 export async function submitLeadForm(data, formName = 'Lead Form') {
   const payload = {
