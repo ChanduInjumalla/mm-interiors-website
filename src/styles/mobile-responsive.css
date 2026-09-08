@@ -241,8 +241,8 @@
   }
 
   .footer__grid {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-xl) !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-lg) !important;
     padding-bottom: var(--space-xl) !important;
   }
 
@@ -295,11 +295,13 @@
   }
 
   .service-features {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
   }
 
   .service-types {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
   }
 
   .service-type-card {
@@ -324,27 +326,30 @@
   }
 
   .home-process {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: var(--space-md) !important;
   }
 
   .home-process__step {
-    text-align: left !important;
+    text-align: center !important;
     display: flex !important;
-    gap: var(--space-md) !important;
-    align-items: flex-start !important;
-    padding: var(--space-md) 0 !important;
-    border-bottom: 1px solid var(--color-border-light) !important;
+    flex-direction: column !important;
+    gap: var(--space-sm) !important;
+    align-items: center !important;
+    padding: var(--space-md) !important;
+    border-bottom: none !important;
+    background: var(--color-bg-card) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--color-border-light) !important;
   }
 
   .home-process__number {
     font-size: var(--fs-h2) !important;
     flex-shrink: 0 !important;
-    min-width: 40px !important;
   }
 
   .home-full-interiors__rooms {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     padding-left: var(--space-md) !important;
   }
 
@@ -369,7 +374,8 @@
   }
 
   .about-values {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
   }
 
   .about-value {
