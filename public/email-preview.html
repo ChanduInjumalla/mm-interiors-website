@@ -1,55 +1,4 @@
-/**
- * MM Interiors — Enterprise Lead Notification Engine (Resend API)
- *
- * Sends ultra-luxury, MNC-grade HTML inquiry dossiers to mminterior7995@gmail.com
- * Designed with architectural aesthetics, champagne gold accents, real interior
- * photography hero, executive KPI metrics, and 1-tap WhatsApp & Call actions.
- */
-
-export default async function handler(req, res) {
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const NOTIFY_EMAIL = 'mminterior7995@gmail.com';
-
-  if (!RESEND_API_KEY) {
-    return res.status(500).json({ error: 'Email service not configured' });
-  }
-
-  try {
-    const data = req.body || {};
-    const timestamp = new Date().toLocaleString('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      dateStyle: 'full',
-      timeStyle: 'short',
-    });
-
-    const clientName = (data.name || 'Website Visitor').trim();
-    const rawPhone = (data.phone || '').toString().trim();
-    const cleanPhone = rawPhone.replace(/\D/g, '');
-    const clientPhone = rawPhone || 'Not provided';
-    const clientEmail = (data.email || '').trim();
-    const clientService = data.service || 'Full Home Interiors';
-    const clientProperty = data.propertyType || 'Apartment / Residence';
-    const clientBhk = data.bhk || '';
-    const clientMessage = (data.message || '').trim() || 'Client requested a callback and consultation regarding interior design planning.';
-    const formSource = data.formName || 'Website Consultation';
-
-    // WhatsApp quick reply URL with prefilled greeting
-    const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
-    const waText = encodeURIComponent(
-      `Hello ${clientName}, this is MM Interiors Hyderabad. Thank you for reaching out regarding your ${clientService} project. When would be a convenient time for a brief discussion?`
-    );
-    const whatsappUrl = `https://wa.me/${waPhone}?text=${waText}`;
-    const telUrl = `tel:+91${cleanPhone.length === 10 ? cleanPhone : cleanPhone.replace(/^91/, '')}`;
-
-    // Luxury Architectural Interior Background (Real 4K photography, NOT cartoon/AI)
-    const heroBgImg = 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80';
-
-    const htmlEmail = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -72,7 +21,7 @@ export default async function handler(req, res) {
 
           <!-- 1. LUXURY HERO BANNER WITH REAL ARCHITECTURAL INTERIOR BACKGROUND -->
           <tr>
-            <td background="${heroBgImg}" bgcolor="#0D1524" style="background-image:url('${heroBgImg}');background-size:cover;background-position:center;padding:0;">
+            <td background="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" bgcolor="#0D1524" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center;padding:0;">
               <!-- Gradient Scrim for high-contrast enterprise readability -->
               <div style="background:linear-gradient(180deg, rgba(8,11,16,0.82) 0%, rgba(14,19,31,0.96) 88%, #0E131F 100%);padding:42px 36px 32px;text-align:center;">
                 
@@ -115,12 +64,12 @@ export default async function handler(req, res) {
                   <!-- Metric 1: Source -->
                   <td width="33%" align="center" style="padding:16px 10px;border-right:1px solid #222D42;">
                     <div style="font-size:10px;font-weight:700;color:#7A8A9E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;">INQUIRY CHANNEL</div>
-                    <div style="font-size:13px;font-weight:700;color:#FFFFFF;">${formSource}</div>
+                    <div style="font-size:13px;font-weight:700;color:#FFFFFF;">Hero Consultation</div>
                   </td>
                   <!-- Metric 2: Service -->
                   <td width="34%" align="center" style="padding:16px 10px;border-right:1px solid #222D42;">
                     <div style="font-size:10px;font-weight:700;color:#7A8A9E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px;">SCOPE OF WORK</div>
-                    <div style="font-size:13px;font-weight:700;color:#E5C07B;">${clientService}</div>
+                    <div style="font-size:13px;font-weight:700;color:#E5C07B;">Full Home Interiors</div>
                   </td>
                   <!-- Metric 3: Response Target -->
                   <td width="33%" align="center" style="padding:16px 10px;">
@@ -149,7 +98,7 @@ export default async function handler(req, res) {
                     Client Name
                   </td>
                   <td width="64%" style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:16px;font-weight:700;color:#FFFFFF;">
-                    ${clientName}
+                    Chandu
                   </td>
                 </tr>
 
@@ -159,8 +108,8 @@ export default async function handler(req, res) {
                     Phone Number
                   </td>
                   <td style="padding:15px 20px;border-bottom:1px solid #1E283C;">
-                    <a href="${telUrl}" style="font-size:16px;font-weight:700;color:#E5C07B;text-decoration:none;letter-spacing:0.5px;">
-                      ${clientPhone}
+                    <a href="tel:+917995659645" style="font-size:16px;font-weight:700;color:#E5C07B;text-decoration:none;letter-spacing:0.5px;">
+                      7995659645
                     </a>
                     <span style="display:inline-block;margin-left:10px;background:rgba(56,211,159,0.15);color:#38D39F;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;">
                       Verified
@@ -184,7 +133,7 @@ export default async function handler(req, res) {
                     Property & Layout
                   </td>
                   <td style="padding:15px 20px;border-bottom:1px solid #1E283C;font-size:14px;font-weight:600;color:#FFFFFF;">
-                    ${clientProperty} ${clientBhk ? `<span style="display:inline-block;margin-left:8px;background:#24324D;color:#E5C07B;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;">${clientBhk}</span>` : ''}
+                    Luxury Penthouse ${clientBhk ? `<span style="display:inline-block;margin-left:8px;background:#24324D;color:#E5C07B;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;">${clientBhk}</span>` : ''}
                   </td>
                 </tr>
 
@@ -204,7 +153,7 @@ export default async function handler(req, res) {
                     Dispatch Time
                   </td>
                   <td style="padding:15px 20px;font-size:13px;color:#8EA0B6;">
-                    ${timestamp}
+                    Tuesday, 8 September 2026 at 6:06 pm
                   </td>
                 </tr>
 
@@ -220,7 +169,7 @@ export default async function handler(req, res) {
               </div>
               <div style="background-color:#141C2E;border-left:4px solid #D4AF37;border-radius:0 10px 10px 0;padding:18px 22px;border-top:1px solid #202B40;border-right:1px solid #202B40;border-bottom:1px solid #202B40;">
                 <p style="margin:0;color:#F1F5F9;font-size:15px;line-height:1.6;font-style:italic;">
-                  &ldquo;${clientMessage}&rdquo;
+                  &ldquo;hy call me, looking for turnkey luxury interiors with false ceiling and modular kitchen&rdquo;
                 </p>
               </div>
             </td>
@@ -237,15 +186,15 @@ export default async function handler(req, res) {
                 <tr>
                   <!-- Button 1: WhatsApp Chat with Pre-filled Message -->
                   <td width="48%" align="center" style="padding-right:8px;">
-                    <a href="${whatsappUrl}" target="_blank" style="display:block;background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);color:#FFFFFF;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(37,211,102,0.25);">
+                    <a href="https://wa.me/917995659645" target="_blank" style="display:block;background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);color:#FFFFFF;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(37,211,102,0.25);">
                       💬 Connect on WhatsApp &rarr;
                     </a>
                   </td>
 
                   <!-- Button 2: Direct Phone Call -->
                   <td width="48%" align="center" style="padding-left:8px;">
-                    <a href="${telUrl}" style="display:block;background:linear-gradient(135deg, #E6CA65 0%, #B8860B 100%);color:#0E131F;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(212,175,55,0.25);">
-                      📞 Call ${clientName.split(' ')[0]} Now
+                    <a href="tel:+917995659645" style="display:block;background:linear-gradient(135deg, #E6CA65 0%, #B8860B 100%);color:#0E131F;text-decoration:none;padding:16px 20px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:0.5px;text-align:center;box-shadow:0 10px 20px rgba(212,175,55,0.25);">
+                      📞 Call Chandu Now
                     </a>
                   </td>
                 </tr>
@@ -297,43 +246,4 @@ export default async function handler(req, res) {
   </table>
 
 </body>
-</html>`;
-
-    // Dispatch via Resend API
-    const resendResponse = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: 'MM Interiors <onboarding@resend.dev>',
-        to: NOTIFY_EMAIL,
-        subject: `★ Client Dossier: ${clientName} — ${clientService} (${clientBhk || clientProperty})`,
-        html: htmlEmail,
-        reply_to: clientEmail || undefined,
-      }),
-    });
-
-    const result = await resendResponse.json();
-
-    if (!resendResponse.ok) {
-      console.error('[Resend Error]', result);
-      return res.status(500).json({ success: false, error: result });
-    }
-
-    return res.status(200).json({
-      success: true,
-      messageId: result.id,
-      dossier: {
-        name: clientName,
-        phone: clientPhone,
-        service: clientService,
-        timestamp,
-      },
-    });
-  } catch (error) {
-    console.error('[API Submit-Form Exception]', error);
-    return res.status(500).json({ success: false, error: error.message });
-  }
-}
+</html>
