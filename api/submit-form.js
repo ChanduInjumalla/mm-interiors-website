@@ -1,0 +1,203 @@
+export default async function handler(req, res) {
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  const NOTIFY_EMAIL = 'mminterior7995@gmail.com';
+
+  if (!RESEND_API_KEY) {
+    return res.status(500).json({ error: 'Email service not configured' });
+  }
+
+  try {
+    const data = req.body;
+    const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+    // Build the beautiful HTML email
+    const htmlEmail = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background-color:#f0f0f0;font-family:'Segoe UI',Roboto,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0;padding:30px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+          
+          <!-- HEADER -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #1B3A5C 0%, #0D2137 100%); padding:35px 40px; border-radius:12px 12px 0 0; text-align:center;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="text-align:center;">
+                    <div style="width:60px;height:60px;background:#B8976A;border-radius:50%;margin:0 auto 15px;line-height:60px;font-size:24px;color:#fff;font-weight:bold;">MM</div>
+                    <h1 style="margin:0;color:#B8976A;font-size:28px;font-weight:700;letter-spacing:1px;">MM INTERIORS</h1>
+                    <p style="margin:8px 0 0;color:#8BA4BE;font-size:13px;letter-spacing:2px;text-transform:uppercase;">Premium Interior Design Studio</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- NOTIFICATION BADGE -->
+          <tr>
+            <td style="background:#fff;padding:25px 40px 0;text-align:center;">
+              <div style="display:inline-block;background:linear-gradient(135deg, #B8976A 0%, #D4AF7A 100%);color:#fff;padding:8px 24px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+                🔔 New ${data.formName || 'Website'} Enquiry
+              </div>
+              <h2 style="margin:18px 0 5px;color:#1B3A5C;font-size:22px;font-weight:600;">New Client Enquiry Received!</h2>
+              <p style="margin:0 0 5px;color:#7A8A9E;font-size:14px;">${timestamp}</p>
+            </td>
+          </tr>
+
+          <!-- CLIENT DETAILS CARD -->
+          <tr>
+            <td style="background:#fff;padding:20px 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E8ECF1;border-radius:10px;overflow:hidden;">
+                
+                <!-- Section Header -->
+                <tr>
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">👤 CLIENT INFORMATION</span>
+                  </td>
+                </tr>
+
+                <!-- Name -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Name</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;font-weight:600;border-bottom:1px solid #F0F2F5;">${data.name || '—'}</td>
+                </tr>
+
+                <!-- Phone -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Phone</td>
+                  <td style="padding:14px 20px;border-bottom:1px solid #F0F2F5;">
+                    <a href="tel:${data.phone || ''}" style="color:#1B3A5C;font-size:15px;font-weight:600;text-decoration:none;">${data.phone || '—'}</a>
+                  </td>
+                </tr>
+
+                <!-- Email -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Email</td>
+                  <td style="padding:14px 20px;border-bottom:1px solid #F0F2F5;">
+                    <a href="mailto:${data.email || ''}" style="color:#1B3A5C;font-size:15px;text-decoration:none;">${data.email || 'Not provided'}</a>
+                  </td>
+                </tr>
+
+                <!-- Project Details Header -->
+                <tr>
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;border-top:1px solid #E8ECF1;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">🏗️ PROJECT DETAILS</span>
+                  </td>
+                </tr>
+
+                <!-- Service -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Service</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.service || 'Not specified'}</td>
+                </tr>
+
+                <!-- Property Type -->
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">Property</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.propertyType || 'Not specified'}</td>
+                </tr>
+
+                <!-- BHK -->
+                ${data.bhk ? `
+                <tr>
+                  <td style="padding:14px 20px;color:#7A8A9E;font-size:13px;font-weight:600;width:35%;border-bottom:1px solid #F0F2F5;text-transform:uppercase;letter-spacing:0.5px;">BHK</td>
+                  <td style="padding:14px 20px;color:#1B3A5C;font-size:15px;border-bottom:1px solid #F0F2F5;">${data.bhk}</td>
+                </tr>` : ''}
+
+                <!-- Message -->
+                <tr>
+                  <td colspan="2" style="background:#F8F9FB;padding:14px 20px;border-bottom:2px solid #B8976A;border-top:1px solid #E8ECF1;">
+                    <span style="color:#1B3A5C;font-size:14px;font-weight:700;letter-spacing:0.5px;">💬 CLIENT MESSAGE</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding:18px 20px;color:#2C3E50;font-size:15px;line-height:1.6;">
+                    ${data.message || 'No message provided'}
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- ACTION BUTTONS -->
+          <tr>
+            <td style="background:#fff;padding:15px 40px 30px;text-align:center;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:5px;" align="center">
+                    <a href="tel:${data.phone || ''}" style="display:inline-block;background:#1B3A5C;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:0.5px;">
+                      📞 Call Client Now
+                    </a>
+                  </td>
+                  <td style="padding:5px;" align="center">
+                    <a href="https://wa.me/91${(data.phone || '').replace(/\\D/g, '')}" style="display:inline-block;background:#25D366;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:0.5px;">
+                      💬 WhatsApp
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:18px 0 0;color:#B8976A;font-size:12px;font-weight:600;">⚡ Call within 30 minutes for best conversion</p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="background:linear-gradient(135deg, #1B3A5C 0%, #0D2137 100%);padding:25px 40px;border-radius:0 0 12px 12px;text-align:center;">
+              <p style="margin:0 0 5px;color:#B8976A;font-size:14px;font-weight:600;">MM Interiors</p>
+              <p style="margin:0 0 10px;color:#8BA4BE;font-size:12px;">Premium Interior Design Studio, Hyderabad</p>
+              <div style="border-top:1px solid #2A4F73;padding-top:12px;margin-top:8px;">
+                <a href="https://mminterior.in" style="color:#B8976A;font-size:12px;text-decoration:none;">mminterior.in</a>
+                <span style="color:#4A6A8A;margin:0 8px;">|</span>
+                <a href="tel:+917995659645" style="color:#8BA4BE;font-size:12px;text-decoration:none;">+91 7995659645</a>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+    // Send email via Resend
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'MM Interiors <onboarding@resend.dev>',
+        to: NOTIFY_EMAIL,
+        subject: `🔔 New ${data.formName || 'Website'} Enquiry — ${data.name || 'Visitor'} | ${data.service || 'Interior Design'}`,
+        html: htmlEmail,
+        reply_to: data.email || undefined,
+      }),
+    });
+
+    const result = await resendResponse.json();
+
+    if (!resendResponse.ok) {
+      console.error('Resend error:', result);
+      return res.status(500).json({ success: false, error: result });
+    }
+
+    return res.status(200).json({ success: true, messageId: result.id });
+  } catch (error) {
+    console.error('Email send error:', error);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+}
