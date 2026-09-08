@@ -102,8 +102,9 @@ export default function HeroConsultationCard() {
         <div 
           className="hero-card-wrapper" 
           role="dialog" 
-          aria-modal="false"
+          aria-modal="true"
           aria-labelledby="hero-card-heading"
+          onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
         >
           <div className="hero-card">
             {/* Close Button */}

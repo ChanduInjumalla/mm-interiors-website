@@ -216,10 +216,10 @@
   .hero__content {
     position: absolute !important;
     bottom: auto !important;
-    top: 57% !important;
+    top: 61% !important;
     left: 0 !important;
     right: 0 !important;
-    transform: translateY(-40%) !important;
+    transform: translateY(-38%) !important;
     text-align: center !important;
     padding: 0 1.25rem !important;
     display: flex !important;
@@ -258,16 +258,172 @@
   }
 
   /* ========================
-     HERO CONSULTATION CARD — HIDDEN on mobile
-     No white section on the hero. Users use
-     the bottom bar or CTA buttons instead.
+     HERO CONSULTATION CARD & TRIGGER (MOBILE)
+     Trigger button placed at the top-right green-line mark.
+     Opens a sleek, compact modal with [x] close.
      ======================== */
-  .hero-card-wrapper {
-    display: none !important;
+  .hero-card-trigger {
+    display: flex !important;
+    position: absolute !important;
+    top: calc(var(--header-height, 68px) + 0.65rem) !important;
+    right: 0.85rem !important;
+    bottom: auto !important;
+    left: auto !important;
+    z-index: 50 !important;
+    padding: 0.38rem 0.85rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    gap: 0.4rem !important;
+    border-radius: 9999px !important;
+    background: rgba(26, 26, 24, 0.92) !important;
+    border: 1.5px solid #B8976A !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), 0 0 12px rgba(184, 151, 106, 0.25) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    cursor: pointer !important;
+    animation: heroTriggerFadeIn 0.3s ease-out !important;
   }
 
-  .hero-card-trigger {
-    display: none !important;
+  .hero-card-trigger__icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #B8976A !important;
+  }
+
+  .hero-card-trigger__icon svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .hero-card-trigger__label {
+    font-size: 0.75rem !important;
+    color: #FFFFFF !important;
+    white-space: nowrap !important;
+    font-weight: 600 !important;
+  }
+
+  /* Compact Modal Overlay on Mobile */
+  .hero-card-wrapper {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 2100 !important;
+    background: rgba(0, 0, 0, 0.72) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1rem !important;
+    pointer-events: auto !important;
+  }
+
+  .hero-card {
+    position: relative !important;
+    width: 90% !important;
+    max-width: 335px !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    padding: 1.15rem 1.1rem 1rem !important;
+    border-radius: 16px !important;
+    background: rgba(22, 22, 20, 0.98) !important;
+    border: 1px solid rgba(184, 151, 106, 0.45) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.05) inset !important;
+    margin: auto !important;
+    color: #fff !important;
+  }
+
+  .hero-card__close {
+    position: absolute !important;
+    top: 0.65rem !important;
+    right: 0.65rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+  }
+
+  .hero-card__close svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .hero-card__badge {
+    display: inline-block !important;
+    font-size: 0.625rem !important;
+    padding: 0.2rem 0.55rem !important;
+    margin-bottom: 0.35rem !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    background: rgba(184, 151, 106, 0.15) !important;
+    border: 1px solid rgba(184, 151, 106, 0.4) !important;
+    color: #B8976A !important;
+    border-radius: 4px !important;
+  }
+
+  .hero-card__title {
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.25rem !important;
+    color: #fff !important;
+  }
+
+  .hero-card__subtitle {
+    font-size: 0.72rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.75rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .hero-card__fields {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.45rem !important;
+  }
+
+  .hero-card__field {
+    margin-bottom: 0 !important;
+  }
+
+  .hero-card__label {
+    font-size: 0.6875rem !important;
+    margin-bottom: 0.15rem !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .hero-card__input,
+  .hero-card__select {
+    width: 100% !important;
+    height: 36px !important;
+    padding: 0.4rem 0.65rem !important;
+    font-size: 0.8125rem !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+  }
+
+  .hero-card__submit {
+    width: 100% !important;
+    min-height: 40px !important;
+    padding: 0.55rem 1rem !important;
+    font-size: 0.85rem !important;
+    margin-top: 0.6rem !important;
+    border-radius: 8px !important;
   }
 
   /* ========================
@@ -788,8 +944,8 @@
   }
 
   .hero__content {
-    top: 57% !important;
-    transform: translateY(-40%) !important;
+    top: 61% !important;
+    transform: translateY(-38%) !important;
     padding: 0 1rem !important;
   }
 
