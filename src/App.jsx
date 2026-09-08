@@ -10,6 +10,7 @@ import { routes } from './routes';
 import { initAnalytics, trackPageView } from './utils/analytics';
 import { getSeoData } from './utils/seo';
 import './styles/global.css';
+import './styles/mobile-responsive.css';
 
 /**
  * ErrorBoundary — Catches runtime errors and displays fallback UI

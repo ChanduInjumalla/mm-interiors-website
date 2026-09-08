@@ -1,0 +1,565 @@
+/*
+ * MM Interiors — Mobile & Tablet Responsive Overrides
+ *
+ * CRITICAL: This file fixes inline React styles (gridTemplateColumns: '1fr 1fr')
+ * that cannot be overridden by normal CSS media queries. We use !important
+ * ONLY on mobile/tablet breakpoints to fix layouts without affecting desktop.
+ *
+ * ⚠️  DO NOT add any rules outside of @media queries in this file.
+ *      Desktop styles must remain untouched.
+ */
+
+
+/* ============================================
+   TABLET BREAKPOINT (max-width: 1024px / iPad)
+   ============================================ */
+@media (max-width: 1024px) {
+
+  /* --- Force all inline 2-column grids to single column on tablets --- */
+  .container > div[style*="grid-template-columns"],
+  .container > section > div[style*="grid-template-columns"],
+  .section > .container > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-2xl) !important;
+  }
+
+  /* --- Trust bar spacing --- */
+  .trust-bar {
+    gap: var(--space-xl);
+  }
+
+  /* --- Before/After grid fix for tablets --- */
+  div[style*="minmax(360px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* --- Cost guide page 2-col grid --- */
+  div[style*="repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ============================================
+   MOBILE BREAKPOINT (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* ========================
+     GLOBAL INLINE GRID OVERRIDE
+     Forces ALL inline 2-column grids to stack vertically.
+     This is the #1 fix for broken mobile layouts.
+     ======================== */
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="gridTemplateColumns"],
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+  }
+
+  /* ========================
+     TYPOGRAPHY — Mobile-friendly sizes
+     ======================== */
+  h1, .h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  h2, .h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem) !important;
+  }
+
+  h3, .h3 {
+    font-size: clamp(1.1rem, 4vw, 1.35rem) !important;
+  }
+
+  /* ========================
+     CONTAINER — Prevent horizontal overflow
+     ======================== */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ========================
+     SECTION — Tighter vertical spacing
+     ======================== */
+  .section {
+    padding-top: var(--space-2xl) !important;
+    padding-bottom: var(--space-2xl) !important;
+  }
+
+  .section--lg {
+    padding-top: var(--space-2xl) !important;
+    padding-bottom: var(--space-2xl) !important;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl) !important;
+  }
+
+  /* ========================
+     HERO SECTION — Full-screen mobile hero
+     ======================== */
+  .hero {
+    height: 100svh !important;
+    min-height: 520px !important;
+  }
+
+  .hero__content {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: 6rem !important;
+  }
+
+  .hero__title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+    max-width: 100% !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero__description {
+    font-size: 0.9375rem !important;
+    max-width: 100% !important;
+    margin-bottom: var(--space-lg) !important;
+  }
+
+  .hero__actions {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.9375rem !important;
+  }
+
+  /* ========================
+     HERO CONSULTATION CARD — Modal on mobile
+     ======================== */
+  .hero-card-wrapper {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    z-index: 1100 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1rem !important;
+    pointer-events: auto !important;
+  }
+
+  .hero-card {
+    width: 100% !important;
+    max-width: 380px !important;
+    max-height: 85vh !important;
+    padding: 1.25rem !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-card-trigger {
+    top: auto !important;
+    bottom: 5rem !important;
+    right: 1rem !important;
+  }
+
+  /* ========================
+     BUTTONS — Touch-friendly sizing
+     ======================== */
+  .btn {
+    min-height: 44px;
+    font-size: 0.9375rem !important;
+  }
+
+  .btn--lg {
+    padding: 0.875rem 1.75rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* ========================
+     CARDS — Full-width on mobile
+     ======================== */
+  .card {
+    border-radius: var(--radius-md) !important;
+  }
+
+  .card__body {
+    padding: var(--space-md) !important;
+  }
+
+  /* ========================
+     CTA SECTION — Stack vertically
+     ======================== */
+  .cta-section__inner {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: var(--space-lg) !important;
+  }
+
+  .cta-section__actions {
+    width: 100%;
+  }
+
+  .cta-section__actions .btn {
+    width: 100% !important;
+  }
+
+  /* ========================
+     FOOTER — Clean mobile layout
+     ======================== */
+  .footer {
+    padding: var(--space-2xl) 0 var(--space-lg) !important;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+    padding-bottom: var(--space-xl) !important;
+  }
+
+  .footer__brand {
+    grid-column: auto !important;
+  }
+
+  .footer__heading {
+    margin-bottom: var(--space-md) !important;
+  }
+
+  .footer__bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: var(--space-sm) !important;
+  }
+
+  .footer__legal {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ========================
+     PAGE HEADER — Compact on mobile
+     ======================== */
+  .page-header {
+    padding: var(--space-2xl) 0 var(--space-lg) !important;
+  }
+
+  .page-header__title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    max-width: 100% !important;
+  }
+
+  .page-header__desc {
+    font-size: 0.9375rem !important;
+    max-width: 100% !important;
+  }
+
+  /* ========================
+     SERVICE PAGE LAYOUT — Single column
+     ======================== */
+  .service-intro {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+  }
+
+  .service-intro__image {
+    order: -1 !important;
+  }
+
+  .service-features {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-types {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-type-card {
+    flex-direction: column !important;
+    gap: var(--space-md) !important;
+    padding: var(--space-lg) !important;
+  }
+
+  /* ========================
+     HOME PAGE SECTIONS — Single column
+     ======================== */
+  .home-why,
+  .home-full-interiors,
+  .home-cost {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+  }
+
+  .home-why__image,
+  .home-full-interiors__image {
+    order: -1 !important;
+  }
+
+  .home-process {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+
+  .home-process__step {
+    text-align: left !important;
+    display: flex !important;
+    gap: var(--space-md) !important;
+    align-items: flex-start !important;
+    padding: var(--space-md) 0 !important;
+    border-bottom: 1px solid var(--color-border-light) !important;
+  }
+
+  .home-process__number {
+    font-size: var(--fs-h2) !important;
+    flex-shrink: 0 !important;
+    min-width: 40px !important;
+  }
+
+  .home-full-interiors__rooms {
+    grid-template-columns: 1fr !important;
+    padding-left: var(--space-md) !important;
+  }
+
+  .home-cost__links {
+    flex-direction: column !important;
+  }
+
+  .home-cost__links .btn {
+    width: 100% !important;
+  }
+
+  /* ========================
+     ABOUT PAGE — Single column
+     ======================== */
+  .about-story {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-xl) !important;
+  }
+
+  .about-story__image {
+    order: -1 !important;
+  }
+
+  .about-values {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-value {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ========================
+     TRUST BAR — Wrap nicely on mobile
+     ======================== */
+  .trust-bar {
+    gap: var(--space-lg) !important;
+    padding: var(--space-lg) 0 !important;
+  }
+
+  .trust-bar__item {
+    flex: 0 0 calc(50% - 1rem);
+  }
+
+  .trust-bar__value {
+    font-size: var(--fs-h4) !important;
+  }
+
+  /* ========================
+     FAQ — Touch-friendly spacing
+     ======================== */
+  .faq-question {
+    padding: var(--space-md) 0 !important;
+    font-size: 0.9375rem !important;
+    gap: var(--space-sm);
+  }
+
+  /* ========================
+     BREADCRUMBS — Compact
+     ======================== */
+  .breadcrumbs {
+    font-size: var(--fs-xs) !important;
+    padding: var(--space-sm) 0 !important;
+  }
+
+  /* ========================
+     FORMS — Full-width inputs
+     ======================== */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 0.75rem !important;
+  }
+
+  /* ========================
+     IMAGES — Prevent overflow
+     ======================== */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ========================
+     INLINE STYLE CONTENT LISTS (ul inside inline-styled divs)
+     ======================== */
+  ul[style*="padding-left"],
+  ol[style*="padding-left"] {
+    padding-left: var(--space-md) !important;
+  }
+
+  li[style*="margin-bottom"] {
+    margin-bottom: var(--space-xs) !important;
+  }
+
+  /* ========================
+     COST GUIDE — Full width cards
+     ======================== */
+  div[style*="repeat(2, 1fr)"],
+  div[style*="repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ========================
+     BEFORE/AFTER PAGE — Single column
+     ======================== */
+  div[style*="minmax(360px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ========================
+     CONTACT PAGE — Stack form and info
+     ======================== */
+  .contact-form__row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ========================
+     SCROLL TO TOP — Above bottom bar
+     ======================== */
+  .scroll-top {
+    bottom: calc(var(--mobile-bar-height) + 16px) !important;
+    right: 12px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* ========================
+     FLOATING WHATSAPP — Above bottom bar
+     ======================== */
+  .floating-whatsapp {
+    bottom: calc(var(--mobile-bar-height) + 16px) !important;
+  }
+
+  /* ========================
+     GENERAL OVERFLOW PROTECTION
+     ======================== */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  pre, code {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+}
+
+
+/* ============================================
+   SMALL MOBILE (max-width: 480px)
+   Extra tight layouts for small phones
+   ============================================ */
+@media (max-width: 480px) {
+
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  h1, .h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2, .h2 {
+    font-size: 1.25rem !important;
+  }
+
+  .hero__title {
+    font-size: 1.75rem !important;
+  }
+
+  .hero__content {
+    padding-bottom: 5rem !important;
+  }
+
+  .section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Smaller card padding */
+  .card__body {
+    padding: 0.75rem !important;
+  }
+
+  .service-feature {
+    padding: var(--space-md) !important;
+  }
+
+  /* Process steps more compact */
+  .home-process__step {
+    padding: var(--space-sm) 0 !important;
+  }
+
+  /* Footer tighter */
+  .footer {
+    padding: 1.5rem 0 1rem !important;
+  }
+
+  /* Trust bar - 2x2 grid */
+  .trust-bar {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--space-md) !important;
+    text-align: center;
+  }
+}
+
+
+/* ============================================
+   LANDSCAPE PHONE (max-height: 500px + landscape)
+   Prevent hero from being too tall in landscape
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    height: auto !important;
+    min-height: 400px !important;
+  }
+
+  .hero__content {
+    position: relative !important;
+    padding: var(--space-xl) var(--space-lg) !important;
+  }
+
+  .hero__actions {
+    flex-direction: row !important;
+  }
+
+  .hero__actions .btn {
+    width: auto !important;
+  }
+}
