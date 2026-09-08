@@ -3,6 +3,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import CTASection from '../../components/CTA/CTASection';
 import FAQSection from '../../components/FAQ/FAQSection';
 import { getFaqsByCategory } from '../../data/faqs';
+import './ProcessPage.css';
 
 export default function ProcessPage() {
   const faqs = getFaqsByCategory('process');
@@ -25,20 +26,20 @@ export default function ProcessPage() {
       </div>
 
       <section className="section">
-        <div className="container container--narrow">
+        <div className="container">
           <div className="section-header section-header--center">
             <span className="overline">Step by Step</span>
             <h2>How Your Interior Project Works</h2>
             <p>A transparent, structured process so you know exactly what to expect at every stage.</p>
             <div className="divider divider--center"></div>
           </div>
-          <div style={{ display: 'grid', gap: 'var(--space-xl)' }}>
+          <div className="process-steps-grid">
             {steps.map(step => (
-              <div key={step.num} style={{ display: 'flex', gap: 'var(--space-xl)', alignItems: 'start', padding: 'var(--space-xl)', background: 'var(--color-bg-alt)', borderRadius: 'var(--radius-lg)' }}>
-                <span style={{ fontSize: 'var(--fs-h2)', fontWeight: 800, color: 'var(--color-gold)', lineHeight: 1, flexShrink: 0, minWidth: '48px' }}>{step.num}</span>
-                <div>
-                  <h3 style={{ marginBottom: 'var(--space-sm)' }}>{step.title}</h3>
-                  <p style={{ color: 'var(--color-text-light)', marginBottom: 0 }}>{step.desc}</p>
+              <div key={step.num} className="process-step-card">
+                <span className="process-step-card__num">{step.num}</span>
+                <div className="process-step-card__content">
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
                 </div>
               </div>
             ))}

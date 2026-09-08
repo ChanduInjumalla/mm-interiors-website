@@ -119,10 +119,81 @@
   }
 
   .service-features {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .service-feature {
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid rgba(184, 151, 106, 0.18) !important;
+    background: #FFFFFF !important;
+  }
+
+  .service-feature__icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .service-feature h4 {
+    font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.2rem !important;
+    line-height: 1.25 !important;
+    color: #1A1A18 !important;
+  }
+
+  .service-feature p {
+    font-size: 0.6875rem !important;
+    line-height: 1.35 !important;
+    color: #666666 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   .service-types {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .service-type-card {
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid rgba(184, 151, 106, 0.18) !important;
+    background: #FFFFFF !important;
+  }
+
+  .service-type-card__number {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    color: var(--color-gold, #B8976A) !important;
+    line-height: 1 !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .service-type-card h4 {
+    font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.2rem !important;
+    line-height: 1.25 !important;
+    color: #1A1A18 !important;
+  }
+
+  .service-type-card p {
+    font-size: 0.6875rem !important;
+    line-height: 1.35 !important;
+    color: #666666 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 }

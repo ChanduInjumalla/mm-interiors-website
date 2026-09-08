@@ -15,10 +15,12 @@
    ============================================ */
 @media (max-width: 1024px) {
 
-  /* --- Force all inline 2-column grids to single column on tablets --- */
-  .container > div[style*="grid-template-columns"],
-  .container > section > div[style*="grid-template-columns"],
-  .section > .container > div[style*="grid-template-columns"] {
+  /* --- Content split sections (text + image) stack vertically on tablets --- */
+  .container > div[style*="1.2fr 1fr"],
+  .container > div[style*="1fr 1.2fr"],
+  .container > div[style*="1fr 1fr"],
+  .container > section > div[style*="1fr 1fr"],
+  .section > .container > div[style*="1fr 1fr"] {
     grid-template-columns: 1fr !important;
     gap: var(--space-2xl) !important;
   }
@@ -32,11 +34,6 @@
   div[style*="minmax(360px"] {
     grid-template-columns: 1fr !important;
   }
-
-  /* --- Cost guide page 2-col grid --- */
-  div[style*="repeat(2, 1fr)"] {
-    grid-template-columns: 1fr !important;
-  }
 }
 
 
@@ -46,15 +43,48 @@
 @media (max-width: 768px) {
 
   /* ========================
-     GLOBAL INLINE GRID OVERRIDE
-     Forces ALL inline 2-column grids to stack vertically.
-     This is the #1 fix for broken mobile layouts.
+     CONTENT SPLIT SECTIONS — Stack vertically on mobile
+     Text on top/bottom, image full width.
      ======================== */
+  div[style*="grid-template-columns: 1.2fr 1fr"],
+  div[style*="grid-template-columns: 1fr 1.2fr"],
   div[style*="grid-template-columns: 1fr 1fr"],
-  div[style*="gridTemplateColumns"],
-  div[style*="grid-template-columns"] {
+  div[style*="gridTemplateColumns: '1.2fr 1fr'"],
+  div[style*="gridTemplateColumns: '1fr 1.2fr'"],
+  div[style*="gridTemplateColumns: '1fr 1fr'"],
+  div[style*="1.2fr 1fr"],
+  div[style*="1fr 1.2fr"],
+  div[style*="1fr 1fr"],
+  .home-why,
+  .home-full-interiors,
+  .home-cost,
+  .service-intro,
+  .about-story {
     grid-template-columns: 1fr !important;
     gap: var(--space-xl) !important;
+  }
+
+  /* ========================
+     UNIVERSAL 2x2 MOBILE GRID
+     All cards, category boxes, process steps, projects, and gallery items
+     Strictly 2 columns (2221 or 2222) with compact gap
+     ======================== */
+  .grid,
+  .grid--2,
+  .grid--3,
+  .grid--4,
+  .projects-grid,
+  .gallery-grid,
+  .home-process,
+  .process-steps-grid,
+  .service-features,
+  .service-types,
+  .about-values,
+  div[style*="repeat(2, 1fr)"],
+  div[style*="repeat(auto-fit"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
   }
 
   /* ========================
@@ -206,40 +236,87 @@
   }
 
   /* ========================
-     CARDS — Premium 3D look on mobile
-     Depth, shadows, clear images, compact text
+     CARDS — Ultra-Premium 3D Poster / Expo Look on Mobile
+     Multi-layer shadows, crisp photography, tactile depth, compact text
      ======================== */
-  .card {
-    border-radius: var(--radius-lg) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06) !important;
-    border: 1px solid rgba(0, 0, 0, 0.04) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  .card,
+  .service-card {
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 12px !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(184, 151, 106, 0.22) !important;
+    overflow: hidden !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    text-decoration: none !important;
   }
 
-  .card:active {
-    transform: scale(0.98) !important;
+  .card:active,
+  .service-card:active {
+    transform: scale(0.97) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .card__image-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+    background: #1F1F1D !important;
   }
 
   .card__image {
-    aspect-ratio: 4/3 !important;
-    object-fit: cover !important;
     width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  .card__image-wrapper::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 45%) !important;
+    pointer-events: none !important;
   }
 
   .card__body {
-    padding: 0.625rem 0.75rem 0.75rem !important;
+    padding: 0.65rem 0.7rem 0.75rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    background: #FFFFFF !important;
+  }
+
+  .card__overline {
+    font-size: 0.5625rem !important;
+    font-weight: 700 !important;
+    color: var(--color-gold, #B8976A) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .card__title {
     font-size: 0.8125rem !important;
-    margin-bottom: 0.25rem !important;
-    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    color: #1A1A18 !important;
+    line-height: 1.25 !important;
+    margin: 0 0 0.25rem 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   .card__text {
     font-size: 0.6875rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 0.5rem !important;
+    line-height: 1.35 !important;
+    color: #666666 !important;
+    margin-bottom: 0.35rem !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -248,46 +325,112 @@
 
   .card__link {
     font-size: 0.6875rem !important;
+    font-weight: 700 !important;
+    color: var(--color-accent, #B8976A) !important;
+    margin-top: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+  }
+
+  /* Category / Feature Boxes — "What We Offer" on Room Pages & Cost Guide */
+  .grid > div:not(.card):not(.project-card),
+  div[style*="repeat(2, 1fr)"] > div {
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(184, 151, 106, 0.2) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07), 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .grid > div:not(.card):not(.project-card) h4,
+  div[style*="repeat(2, 1fr)"] > div h4 {
+    font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.25 !important;
+    color: var(--color-accent, #B8976A) !important;
+  }
+
+  .grid > div:not(.card):not(.project-card) p,
+  div[style*="repeat(2, 1fr)"] > div p {
+    font-size: 0.6875rem !important;
+    line-height: 1.35 !important;
+    color: #666666 !important;
+    margin-bottom: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   /* Service Feature Cards — compact for 2-col */
   .service-feature {
-    padding: var(--space-md) !important;
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(184, 151, 106, 0.2) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07) !important;
+    background: #FFFFFF !important;
   }
 
   .service-feature__icon {
-    width: 36px !important;
-    height: 36px !important;
-    margin-bottom: var(--space-sm) !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin-bottom: 0.35rem !important;
     font-size: 1rem !important;
   }
 
   .service-feature h4 {
     font-size: 0.8125rem !important;
-    margin-bottom: 0.25rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.2rem !important;
+    line-height: 1.25 !important;
   }
 
   .service-feature p {
     font-size: 0.6875rem !important;
-    line-height: 1.4 !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   /* Service Type Cards — compact for 2-col */
   .service-type-card {
     flex-direction: column !important;
-    gap: var(--space-sm) !important;
-    padding: var(--space-md) !important;
-    border-radius: var(--radius-md) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+    gap: 0.35rem !important;
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07) !important;
+    border: 1px solid rgba(184, 151, 106, 0.2) !important;
+    background: #FFFFFF !important;
+  }
+
+  .service-type-card__number {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    color: var(--color-gold, #B8976A) !important;
+    line-height: 1 !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .service-type-card h4 {
     font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .service-type-card p {
     font-size: 0.6875rem !important;
-    line-height: 1.4 !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   /* ========================
@@ -519,13 +662,7 @@
     margin-bottom: var(--space-xs) !important;
   }
 
-  /* ========================
-     COST GUIDE — Full width cards
-     ======================== */
-  div[style*="repeat(2, 1fr)"],
-  div[style*="repeat(auto-fit"] {
-    grid-template-columns: 1fr !important;
-  }
+  /* Cost guide, process steps & category boxes maintain 2-column on mobile */
 
   /* ========================
      BEFORE/AFTER PAGE — Single column
@@ -611,18 +748,45 @@
     padding-bottom: 1.5rem !important;
   }
 
+  /* Universal 2x2 grids stay 2-column on small mobile */
+  .grid,
+  .grid--2,
+  .grid--3,
+  .grid--4,
+  .projects-grid,
+  .gallery-grid,
+  .home-process,
+  .process-steps-grid,
+  .service-features,
+  .service-types,
+  .about-values,
+  div[style*="repeat(2, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
   /* Smaller card padding */
   .card__body {
-    padding: 0.75rem !important;
+    padding: 0.55rem 0.6rem 0.65rem !important;
+  }
+
+  .grid > div:not(.card):not(.project-card),
+  div[style*="repeat(2, 1fr)"] > div {
+    padding: 0.7rem 0.6rem !important;
   }
 
   .service-feature {
-    padding: var(--space-md) !important;
+    padding: 0.7rem 0.6rem !important;
   }
 
-  /* Process steps more compact */
-  .home-process__step {
-    padding: var(--space-sm) 0 !important;
+  .service-type-card {
+    padding: 0.7rem 0.6rem !important;
+  }
+
+  /* Process steps compact */
+  .home-process__step,
+  .process-step-card {
+    padding: 0.75rem 0.6rem !important;
   }
 
   /* Footer tighter */

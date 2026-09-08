@@ -1,0 +1,96 @@
+/* Process Page Styles */
+
+.process-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.process-step-card {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  padding: var(--space-xl);
+  background: var(--color-bg-card, #FFFFFF);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light, #EAEAEA);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.process-step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.process-step-card__num {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--color-gold, #B8976A);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 48px;
+}
+
+.process-step-card__content h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.process-step-card__content p {
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+
+/* Mobile: 2x2 Grid with 3D Poster / Box Styling */
+@media (max-width: 768px) {
+  .process-steps-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .process-step-card {
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+    padding: 0.85rem 0.75rem !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(184, 151, 106, 0.2) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07), 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+    background: #FFFFFF !important;
+  }
+
+  .process-step-card__num {
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    color: var(--color-gold, #B8976A) !important;
+    min-width: auto !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .process-step-card__content h3 {
+    font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.25rem !important;
+    line-height: 1.25 !important;
+    color: #1A1A18 !important;
+  }
+
+  .process-step-card__content p {
+    font-size: 0.6875rem !important;
+    line-height: 1.35 !important;
+    color: #666666 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-steps-grid {
+    gap: 0.55rem !important;
+  }
+
+  .process-step-card {
+    padding: 0.75rem 0.65rem !important;
+  }
+}
