@@ -205,7 +205,7 @@ https://mminterior.in | +91 7995659645
 `;
 
     // Send email via Resend
-    const fromAddress = process.env.RESEND_FROM_EMAIL || 'MM Interiors <onboarding@resend.dev>';
+    const fromAddress = 'MM Interiors <leads@mminterior.in>';
     const subjectLine = `New Client Inquiry: ${data.name || 'Website Visitor'} - ${data.service || 'Interior Design'} | MM Interiors`;
 
     const resendResponse = await fetch('https://api.resend.com/emails', {
