@@ -594,6 +594,31 @@
   .header__mobile {
     display: block;
   }
+
+  /* Shorten logo on mobile */
+  .header__logo {
+    padding: 0.15rem 0;
+  }
+
+  .header__logo-name {
+    gap: 0.35rem;
+  }
+
+  .header__logo-mm {
+    font-size: 1.0625rem;
+  }
+
+  .header__logo-sep {
+    height: 11px;
+  }
+
+  .header__logo-word {
+    font-size: 1.0625rem;
+  }
+
+  .header__logo-tagline {
+    display: none;
+  }
 }
 
 @media (min-width: 1081px) {
