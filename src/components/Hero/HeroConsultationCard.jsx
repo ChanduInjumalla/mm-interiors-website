@@ -28,6 +28,18 @@ export default function HeroConsultationCard() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  // When modal is open on mobile, toggle body class to hide header split
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('has-hero-modal-open');
+    } else {
+      document.body.classList.remove('has-hero-modal-open');
+    }
+    return () => {
+      document.body.classList.remove('has-hero-modal-open');
+    };
+  }, [isOpen]);
+
   const handleClose = () => {
     setIsOpen(false);
   };
