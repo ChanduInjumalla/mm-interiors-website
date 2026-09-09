@@ -936,8 +936,9 @@
   /* ========================
      FLOATING WHATSAPP — Above bottom bar
      ======================== */
-  .floating-whatsapp {
-    bottom: calc(var(--mobile-bar-height) + 16px) !important;
+  .floating-wa {
+    bottom: 1.25rem !important;
+    right: 1rem !important;
   }
 
   /* ========================
