@@ -222,9 +222,9 @@ export default function ProjectsPage() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: 'var(--space-3xl)', marginBottom: 'var(--space-xl)' }}>
-            <Link to="/gallery" className="btn btn--secondary btn--lg">
-              🖼️ Browse Complete Photo Gallery (25+ Photos)
+          <div className="projects-gallery-link">
+            <Link to="/gallery" className="btn btn--secondary">
+              🖼️ Browse Full Gallery (25+ Photos)
             </Link>
           </div>
         </div>
