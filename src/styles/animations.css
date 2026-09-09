@@ -1,0 +1,80 @@
+/* ============================================
+   SCROLL-TRIGGERED ANIMATIONS
+   Fade-in, slide-up, slide-left/right, scale-in
+   Respects prefers-reduced-motion
+   ============================================ */
+
+/* Base reveal state — invisible, offset */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered item — for grid/list children */
+.scroll-reveal-item {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Variant: Fade Up (default — already defined above) */
+
+/* Variant: Fade Left */
+.scroll-reveal--left {
+  transform: translateX(-40px);
+}
+.scroll-reveal--left.is-visible {
+  transform: translateX(0);
+}
+
+/* Variant: Fade Right */
+.scroll-reveal--right {
+  transform: translateX(40px);
+}
+.scroll-reveal--right.is-visible {
+  transform: translateX(0);
+}
+
+/* Variant: Scale In */
+.scroll-reveal--scale {
+  transform: scale(0.88);
+}
+.scroll-reveal--scale.is-visible {
+  transform: scale(1);
+}
+
+/* Variant: Fade only (no movement) */
+.scroll-reveal--fade {
+  transform: none;
+}
+.scroll-reveal--fade.is-visible {
+  transform: none;
+}
+
+/* Accessibility: Skip animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-item,
+  .scroll-reveal--left,
+  .scroll-reveal--right,
+  .scroll-reveal--scale,
+  .scroll-reveal--fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

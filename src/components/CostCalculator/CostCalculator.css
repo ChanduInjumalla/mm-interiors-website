@@ -315,3 +315,85 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Room Icon in checkbox */
+.cost-calc__room-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Room-wise Cost Breakdown */
+.cost-calc__breakdown {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cost-calc__breakdown-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent, #B8976A);
+  margin-bottom: 0.75rem;
+}
+
+.cost-calc__bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.cost-calc__bar-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100px;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text, #1F1F1D);
+}
+
+.cost-calc__bar-icon {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.cost-calc__bar-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cost-calc__bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #B8976A 0%, #D4B896 100%);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 4px;
+}
+
+.cost-calc__bar-value {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-light, #6B6B6B);
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .cost-calc__bar-label {
+    width: 80px;
+    font-size: 0.6875rem;
+  }
+  .cost-calc__bar-value {
+    width: 40px;
+    font-size: 0.625rem;
+  }
+}

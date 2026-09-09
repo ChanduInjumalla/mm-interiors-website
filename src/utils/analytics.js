@@ -7,7 +7,7 @@
  * [REPLACE_WITH_GA4_ID] — Replace with actual GA4 Measurement ID before production.
  */
 
-const GA_MEASUREMENT_ID = ''; // [REPLACE_WITH_GA4_ID]
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA4_ID || '';
 
 /**
  * Initialize Google Analytics (GA4)

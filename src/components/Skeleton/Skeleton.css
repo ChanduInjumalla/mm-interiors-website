@@ -1,0 +1,117 @@
+/* ============================================
+   SKELETON LOADING SCREENS
+   Shimmer animation for loading placeholders
+   ============================================ */
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-block {
+  background: linear-gradient(
+    90deg,
+    #E8E5E0 25%,
+    #F0EDE8 37%,
+    #E8E5E0 63%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+
+/* Hero Skeleton */
+.page-skeleton {
+  margin-top: 64px;
+}
+
+.skeleton-hero {
+  height: 45vh;
+  min-height: 280px;
+  background: linear-gradient(135deg, #2C3E50 0%, #3D5A73 50%, #1B3A5C 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem var(--container-padding, 2rem) 3rem;
+}
+
+.skeleton-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 500px;
+}
+
+.skeleton-hero__content .skeleton-block {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.08) 25%,
+    rgba(255,255,255,0.15) 37%,
+    rgba(255,255,255,0.08) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+
+/* Content Section */
+.skeleton-content {
+  padding: 2.5rem var(--container-padding, 2rem);
+  max-width: var(--container-max, 1280px);
+  margin: 0 auto;
+}
+
+.skeleton-section {
+  margin-bottom: 2rem;
+}
+
+.skeleton-center {
+  margin: 0 auto 1.5rem;
+}
+
+/* Grid of cards */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* Card skeleton */
+.skeleton-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #E8E5E0;
+}
+
+.skeleton-card__image {
+  height: 180px;
+  border-radius: 0;
+}
+
+.skeleton-card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skeleton-hero {
+    height: 35vh;
+    min-height: 200px;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .skeleton-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .skeleton-card__image {
+    height: 120px;
+  }
+}

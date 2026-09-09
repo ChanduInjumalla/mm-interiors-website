@@ -6,10 +6,13 @@ import Footer from './components/Footer/Footer';
 import MobileBottomBar from './components/MobileBottomBar/MobileBottomBar';
 import FloatingWhatsApp from './components/FloatingWhatsApp/FloatingWhatsApp';
 import ScrollToTopButton from './components/ScrollToTop/ScrollToTopButton';
+import StructuredData from './components/StructuredData/StructuredData';
+import PageSkeleton from './components/Skeleton/Skeleton';
 import { routes } from './routes';
 import { initAnalytics, trackPageView } from './utils/analytics';
 import { getSeoData } from './utils/seo';
 import './styles/global.css';
+import './styles/animations.css';
 import './styles/mobile-responsive.css';
 
 /**
@@ -103,25 +106,7 @@ function PageTracker() {
  * Loading fallback for lazy-loaded pages
  */
 function PageLoader() {
-  return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '60vh',
-      marginTop: '72px',
-    }}>
-      <div style={{
-        width: '32px',
-        height: '32px',
-        border: '3px solid #E5E2DC',
-        borderTopColor: '#1B3A5C',
-        borderRadius: '50%',
-        animation: 'spin 0.8s linear infinite',
-      }} />
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-    </div>
-  );
+  return <PageSkeleton />;
 }
 
 /**
@@ -135,6 +120,7 @@ function AppLayout() {
     <>
       <ScrollToTop />
       <PageTracker />
+      <StructuredData />
       <Header />
       <main id="main-content" className={isHomePage ? 'main--home' : 'main--inner'}>
         <ErrorBoundary>

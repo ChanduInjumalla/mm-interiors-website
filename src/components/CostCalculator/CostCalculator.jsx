@@ -37,14 +37,14 @@ const PACKAGES = [
 ];
 
 const ROOM_ADDONS = [
-  { id: 'kitchen', label: 'Modular Kitchen (Countertop + Cabinets + Baskets)', defaultSelected: true, weight: 1.0 },
-  { id: 'masterBed', label: 'Master Bedroom Wardrobe + Lofts + Vanity', defaultSelected: true, weight: 1.0 },
-  { id: 'secondBed', label: 'Second Bedroom Wardrobe & Storage', defaultSelected: true, weight: 0.9 },
-  { id: 'livingTV', label: 'Living Room TV Unit & Feature Wall', defaultSelected: true, weight: 0.8 },
-  { id: 'falseCeiling', label: 'False Ceiling with LED & Ambient Lighting', defaultSelected: true, weight: 0.85 },
-  { id: 'pooja', label: 'Designer Pooja Unit / CNC Cutout', defaultSelected: false, weight: 0.4 },
-  { id: 'wallPanelling', label: 'Fluted Wall Panelling & Wallpaper', defaultSelected: false, weight: 0.5 },
-  { id: 'foyerShoe', label: 'Foyer Shoe Rack & Entryway Partition', defaultSelected: false, weight: 0.35 },
+  { id: 'kitchen', label: 'Modular Kitchen (Countertop + Cabinets + Baskets)', defaultSelected: true, weight: 1.0, icon: '🍳', shortName: 'Kitchen' },
+  { id: 'masterBed', label: 'Master Bedroom Wardrobe + Lofts + Vanity', defaultSelected: true, weight: 1.0, icon: '🛏️', shortName: 'Master Bed' },
+  { id: 'secondBed', label: 'Second Bedroom Wardrobe & Storage', defaultSelected: true, weight: 0.9, icon: '🛌', shortName: '2nd Bedroom' },
+  { id: 'livingTV', label: 'Living Room TV Unit & Feature Wall', defaultSelected: true, weight: 0.8, icon: '📺', shortName: 'Living Room' },
+  { id: 'falseCeiling', label: 'False Ceiling with LED & Ambient Lighting', defaultSelected: true, weight: 0.85, icon: '💡', shortName: 'Ceiling' },
+  { id: 'pooja', label: 'Designer Pooja Unit / CNC Cutout', defaultSelected: false, weight: 0.4, icon: '🪔', shortName: 'Pooja' },
+  { id: 'wallPanelling', label: 'Fluted Wall Panelling & Wallpaper', defaultSelected: false, weight: 0.5, icon: '🧱', shortName: 'Walls' },
+  { id: 'foyerShoe', label: 'Foyer Shoe Rack & Entryway Partition', defaultSelected: false, weight: 0.35, icon: '🚪', shortName: 'Foyer' },
 ];
 
 export default function CostCalculator() {
@@ -167,6 +167,7 @@ export default function CostCalculator() {
                     onChange={() => toggleRoom(room.id)}
                     className="cost-calc__checkbox"
                   />
+                  <span className="cost-calc__room-icon">{room.icon}</span>
                   <span className="cost-calc__room-label">{room.label}</span>
                 </label>
               );
@@ -185,6 +186,35 @@ export default function CostCalculator() {
           <p className="cost-calc__result-note">
             *Includes design, 3D visualization, materials, hardware, manufacturing, site execution and handover.
           </p>
+
+          {/* Room-wise cost breakdown */}
+          <div className="cost-calc__breakdown">
+            <div className="cost-calc__breakdown-title">Room-wise Cost Split</div>
+            {(() => {
+              const activeRooms = ROOM_ADDONS.filter(r => selectedRooms.includes(r.id));
+              const totalWeight = activeRooms.reduce((s, r) => s + r.weight, 0);
+              const avgCost = (estimate.min + estimate.max) / 2;
+              return activeRooms.map(room => {
+                const pct = Math.round((room.weight / totalWeight) * 100);
+                const roomCost = Math.round((room.weight / totalWeight) * avgCost);
+                const fmt = roomCost >= 100000
+                  ? `₹${(roomCost / 100000).toFixed(1)}L`
+                  : `₹${(roomCost / 1000).toFixed(0)}K`;
+                return (
+                  <div key={room.id} className="cost-calc__bar-row">
+                    <div className="cost-calc__bar-label">
+                      <span className="cost-calc__bar-icon">{room.icon}</span>
+                      <span>{room.shortName}</span>
+                    </div>
+                    <div className="cost-calc__bar-track">
+                      <div className="cost-calc__bar-fill" style={{ width: `${pct}%` }}></div>
+                    </div>
+                    <span className="cost-calc__bar-value">{fmt}</span>
+                  </div>
+                );
+              });
+            })()}
+          </div>
         </div>
 
         <div className="cost-calc__result-actions">

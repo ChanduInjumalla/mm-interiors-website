@@ -7,6 +7,7 @@ import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import { getHomepageServices, bhkTypes } from '../../data/services';
 import { getHomepageFaqs } from '../../data/faqs';
 import { trackCTAClick } from '../../utils/analytics';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import './HomePage.css';
 
 /**
@@ -38,7 +39,13 @@ import './HomePage.css';
 export default function HomePage() {
   const services = getHomepageServices();
   const faqs = getHomepageFaqs();
-
+  const trustRef = useScrollReveal();
+  const interiorsRef = useScrollReveal();
+  const servicesRef = useScrollReveal();
+  const processRef = useScrollReveal();
+  const bhkRef = useScrollReveal();
+  const costRef = useScrollReveal();
+  const coverageRef = useScrollReveal();
   return (
     <>
       <SEOHead />
@@ -59,7 +66,7 @@ export default function HomePage() {
       {/* 2. Trust Strip */}
       <section className="section--sm">
         <div className="container">
-          <div className="trust-bar">
+          <div className="trust-bar scroll-reveal" ref={trustRef.ref}>
             <div className="trust-bar__item">
               <div className="trust-bar__value">Hyderabad</div>
               <div className="trust-bar__label">Based & Operating</div>
@@ -84,7 +91,7 @@ export default function HomePage() {
       {/* 4. Full Home Interiors Feature Block */}
       <section className="section section--alt">
         <div className="container">
-          <div className="home-full-interiors">
+          <div className="home-full-interiors scroll-reveal" ref={interiorsRef.ref}>
             <div className="home-full-interiors__image">
               <img 
                 src="/images/full-home-interior.jpg" 
@@ -133,7 +140,7 @@ export default function HomePage() {
             <p>From individual rooms to complete homes — explore the services we offer.</p>
             <div className="divider divider--center"></div>
           </div>
-          <div className="grid grid--4">
+          <div className="grid grid--4 scroll-reveal" ref={servicesRef.ref}>
             {services.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
@@ -155,7 +162,7 @@ export default function HomePage() {
             <p>A clear, step-by-step approach from consultation to handover.</p>
             <div className="divider divider--center"></div>
           </div>
-          <div className="home-process">
+          <div className="home-process scroll-reveal" ref={processRef.ref}>
             <div className="home-process__step">
               <div className="home-process__number">01</div>
               <h3>Consultation</h3>
@@ -194,7 +201,7 @@ export default function HomePage() {
             <p>Whether you have a 2BHK apartment or a 4BHK villa — we design for your home type.</p>
             <div className="divider divider--center"></div>
           </div>
-          <div className="grid grid--3">
+          <div className="grid grid--3 scroll-reveal" ref={bhkRef.ref}>
             {bhkTypes.slice(0, 6).map((bhk) => (
               <Link key={bhk.id} to={bhk.url} className="card" style={{ textDecoration: 'none' }}>
                 <div className="card__image-wrapper">
@@ -220,7 +227,7 @@ export default function HomePage() {
       {/* 8. Cost Guidance */}
       <section className="section section--alt">
         <div className="container">
-          <div className="home-cost">
+          <div className="home-cost scroll-reveal" ref={costRef.ref}>
             <div className="home-cost__content">
               <span className="overline">Cost Guidance</span>
               <h2>Interior Design Cost in Hyderabad</h2>
@@ -260,7 +267,7 @@ export default function HomePage() {
 
       {/* 9. Hyderabad Coverage */}
       <section className="section">
-        <div className="container container--narrow" style={{ textAlign: 'center' }}>
+        <div className="container container--narrow scroll-reveal" ref={coverageRef.ref} style={{ textAlign: 'center' }}>
           <span className="overline">Service Area</span>
           <h2>Interior Designers Serving Across Hyderabad</h2>
           <div className="divider divider--center"></div>

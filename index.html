@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1B3A5C" />
+    <meta name="theme-color" content="#1F1F1D" />
     <meta name="format-detection" content="telephone=no" />
     
     <!-- Preconnect to Google Fonts -->
@@ -15,7 +15,19 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
     
+    <!-- Critical inline CSS for instant first paint -->
+    <style>
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#FDFCFA;color:#1F1F1D;-webkit-font-smoothing:antialiased}
+      .header{position:fixed;top:0;left:0;right:0;z-index:1000;background:#1F1F1D;border-bottom:2px solid #B8976A;height:64px;display:flex;align-items:center}
+      .hero{position:relative;width:100%;height:100vh;min-height:540px;overflow:hidden;background:#2C3E50}
+      #root{min-height:100vh}
+    </style>
+
     <!-- Default title (overridden by react-helmet-async per page) -->
     <title>Interior Designers in Hyderabad | MM Interiors</title>
     <meta name="description" content="MM Interiors — trusted home interior designers in Hyderabad. Complete home interiors including modular kitchens, wardrobes, living rooms, bedrooms, false ceilings and more." />

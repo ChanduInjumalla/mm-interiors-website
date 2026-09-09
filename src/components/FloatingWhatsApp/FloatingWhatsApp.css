@@ -1,5 +1,6 @@
 /* ============================================
-   FLOATING WHATSAPP BUTTON (DESKTOP & TABLET)
+   FLOATING WHATSAPP CHAT WIDGET
+   Green FAB + Chat bubble popup
    ============================================ */
 
 .floating-wa {
@@ -8,22 +9,18 @@
   right: 2rem;
   z-index: 990;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 0.75rem;
   animation: waSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes waSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px) scale(0.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* Green Circle Button */
 .floating-wa__btn {
   display: flex;
   align-items: center;
@@ -36,6 +33,7 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .floating-wa__btn:hover {
@@ -44,32 +42,131 @@
   background: #20BA5A;
 }
 
-.floating-wa__tooltip {
-  background: #1F1F1D;
+/* ========================
+   CHAT BUBBLE POPUP
+   ======================== */
+.floating-wa__bubble {
+  width: 280px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: bubblePopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@keyframes bubblePopIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Bubble close button */
+.floating-wa__bubble-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.floating-wa__bubble-close:hover {
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  border: 1px solid rgba(184, 151, 106, 0.4);
-  padding: 0.5rem 0.85rem;
-  border-radius: 6px;
-  font-size: 0.78125rem;
-  font-weight: 500;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  white-space: nowrap;
-  animation: tooltipFade 0.2s ease;
-  pointer-events: none;
 }
 
-@keyframes tooltipFade {
-  from {
-    opacity: 0;
-    transform: translateX(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* Header with avatar */
+.floating-wa__bubble-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: #075E54;
+  color: #fff;
 }
 
-/* Show on mobile too — positioned as floating support icon like HomeLane/Livspace */
+.floating-wa__bubble-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.floating-wa__bubble-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+.floating-wa__bubble-status {
+  font-size: 0.6875rem;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.floating-wa__bubble-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #25D366;
+  display: inline-block;
+}
+
+/* Message area */
+.floating-wa__bubble-msg {
+  padding: 0.85rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #333;
+  background: #f0f0f0;
+  border-left: 3px solid #25D366;
+  margin: 0.75rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* CTA button */
+.floating-wa__bubble-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0 0.75rem 0.75rem;
+  padding: 0.6rem;
+  background: #25D366;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.floating-wa__bubble-cta:hover {
+  background: #20BA5A;
+}
+
+/* ========================
+   MOBILE RESPONSIVE
+   ======================== */
 @media (max-width: 768px) {
   .floating-wa {
     bottom: 1.25rem;
@@ -88,7 +185,26 @@
     height: 24px;
   }
 
-  .floating-wa__tooltip {
-    display: none;
+  .floating-wa__bubble {
+    width: 260px;
+    right: 0;
+  }
+
+  .floating-wa__bubble-msg {
+    font-size: 0.75rem;
+    padding: 0.7rem 0.85rem;
+    margin: 0.6rem;
+  }
+
+  .floating-wa__bubble-cta {
+    margin: 0 0.6rem 0.6rem;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .floating-wa__bubble {
+    width: 240px;
   }
 }

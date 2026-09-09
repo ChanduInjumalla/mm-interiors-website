@@ -1,0 +1,27 @@
+{
+  "name": "MM Interiors — Interior Designers in Hyderabad",
+  "short_name": "MM Interiors",
+  "description": "Premium home interior designers in Hyderabad. Modular kitchens, wardrobes, living rooms, bedrooms, false ceilings and complete home interiors.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1F1F1D",
+  "theme_color": "#1F1F1D",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr"
+}
