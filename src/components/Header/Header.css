@@ -617,7 +617,16 @@
   }
 
   .header__logo-tagline {
-    display: none;
+    display: block;
+    font-size: 0.46875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #B8976A;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0.95;
+    padding-left: 0.05rem;
   }
 }
 

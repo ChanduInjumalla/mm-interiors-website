@@ -153,19 +153,29 @@
   }
 
   /* ========================
-     HEADER LOGO — Shorten on mobile
+     HEADER LOGO — Elegant on mobile
      ======================== */
   .header__logo {
     padding: 0.15rem 0 !important;
   }
 
+  .header__logo-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.12rem !important;
+  }
+
   .header__logo-name {
+    display: flex !important;
+    align-items: center !important;
     gap: 0.35rem !important;
+    line-height: 1 !important;
   }
 
   .header__logo-mm {
     font-size: 1.0625rem !important;
     letter-spacing: 0.03em !important;
+    line-height: 1 !important;
   }
 
   .header__logo-sep {
@@ -175,10 +185,20 @@
   .header__logo-word {
     font-size: 1.0625rem !important;
     letter-spacing: 0.04em !important;
+    line-height: 1 !important;
   }
 
   .header__logo-tagline {
-    display: none !important;
+    display: block !important;
+    font-size: 0.46875rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.16em !important;
+    color: #B8976A !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    opacity: 0.95 !important;
+    padding-left: 0.05rem !important;
   }
 
   /* ========================
