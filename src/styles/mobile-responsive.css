@@ -207,10 +207,10 @@
      Matches HomeLane / Livspace mobile pattern.
      ======================== */
   .hero {
-    height: 65svh !important;
-    height: 65vh !important;
+    height: 73svh !important;
+    height: 73vh !important;
     min-height: 380px !important;
-    max-height: 550px !important;
+    max-height: 620px !important;
   }
 
   .hero__bg {
