@@ -353,13 +353,23 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.65);
-    z-index: 1100;
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    padding: env(safe-area-inset-top, 1rem) 1rem env(safe-area-inset-bottom, 1rem) 1rem;
     pointer-events: auto;
+    animation: none;
+    transform: none;
+    opacity: 1;
+    margin: 0;
+    overscroll-behavior: contain;
   }
 
   .hero-card {
