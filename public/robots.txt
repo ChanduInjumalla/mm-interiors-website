@@ -1,4 +1,4 @@
-# robots.txt for https://mminterior.in
+# robots.txt for https://www.mminterior.in
 User-agent: *
 Allow: /
 
@@ -8,4 +8,4 @@ Disallow: /email-preview.html
 Disallow: /api/
 
 # Sitemap index
-Sitemap: https://mminterior.in/sitemap.xml
+Sitemap: https://www.mminterior.in/sitemap.xml
