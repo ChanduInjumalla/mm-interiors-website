@@ -1,0 +1,11 @@
+# robots.txt for https://mminterior.in
+User-agent: *
+Allow: /
+
+# Disallow utility and internal routes
+Disallow: /thank-you
+Disallow: /email-preview.html
+Disallow: /api/
+
+# Sitemap index
+Sitemap: https://mminterior.in/sitemap.xml
