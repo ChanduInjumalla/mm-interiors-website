@@ -2,12 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * useScrollReveal — IntersectionObserver-based scroll animation hook
- * Adds 'is-visible' class when element enters viewport
- * 
- * @param {Object} options
- * @param {number} options.threshold - Visibility threshold (0-1), default 0.15
- * @param {string} options.rootMargin - Root margin, default '0px 0px -60px 0px'
- * @param {boolean} options.once - Only trigger once, default true
+ * Adds 'is-visible' class when element enters viewport.
+ * Includes a safety timeout to ALWAYS show content even if observer fails.
  */
 export function useScrollReveal(options = {}) {
   const ref = useRef(null);
@@ -17,32 +13,52 @@ export function useScrollReveal(options = {}) {
     const element = ref.current;
     if (!element) return;
 
-    // Respect reduced-motion preference
+    // Respect reduced-motion preference — show immediately
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsVisible(true);
       element.classList.add('is-visible');
       return;
     }
 
-    const { threshold = 0.15, rootMargin = '0px 0px -60px 0px', once = true } = options;
+    const { threshold = 0.05, rootMargin = '0px', once = true } = options;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          element.classList.add('is-visible');
-          if (once) observer.unobserve(element);
-        } else if (!once) {
-          setIsVisible(false);
-          element.classList.remove('is-visible');
-        }
-      },
-      { threshold, rootMargin }
-    );
+    // Safety timeout — ALWAYS make content visible after 2s
+    // This prevents content from being stuck at opacity:0
+    const safetyTimer = setTimeout(() => {
+      if (!element.classList.contains('is-visible')) {
+        element.classList.add('is-visible');
+        setIsVisible(true);
+      }
+    }, 2000);
 
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [options.threshold, options.rootMargin, options.once]);
+    let observer;
+    try {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            element.classList.add('is-visible');
+            clearTimeout(safetyTimer);
+            if (once) observer.unobserve(element);
+          } else if (!once) {
+            setIsVisible(false);
+            element.classList.remove('is-visible');
+          }
+        },
+        { threshold, rootMargin }
+      );
+      observer.observe(element);
+    } catch {
+      // If IntersectionObserver fails, show content immediately
+      element.classList.add('is-visible');
+      setIsVisible(true);
+    }
+
+    return () => {
+      clearTimeout(safetyTimer);
+      if (observer) observer.disconnect();
+    };
+  }, []);
 
   return { ref, isVisible };
 }
@@ -65,7 +81,14 @@ export function useScrollRevealAll(options = {}) {
       return;
     }
 
-    const { threshold = 0.1, rootMargin = '0px 0px -40px 0px', staggerDelay = 80 } = options;
+    const { threshold = 0.05, rootMargin = '0px', staggerDelay = 80 } = options;
+
+    // Safety timeout
+    const safetyTimer = setTimeout(() => {
+      container.querySelectorAll('.scroll-reveal-item:not(.is-visible)').forEach((el) => {
+        el.classList.add('is-visible');
+      });
+    }, 2500);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -77,6 +100,7 @@ export function useScrollRevealAll(options = {}) {
                 item.classList.add('is-visible');
               }, i * staggerDelay);
             });
+            clearTimeout(safetyTimer);
             observer.unobserve(entry.target);
           }
         });
@@ -85,7 +109,10 @@ export function useScrollRevealAll(options = {}) {
     );
 
     observer.observe(container);
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(safetyTimer);
+      observer.disconnect();
+    };
   }, []);
 
   return containerRef;
