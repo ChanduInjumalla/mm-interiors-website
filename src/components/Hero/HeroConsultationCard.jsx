@@ -5,7 +5,9 @@ import { submitLeadForm } from '../../utils/formSubmit';
 import './HeroConsultationCard.css';
 
 export default function HeroConsultationCard() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth > 768 : true
+  );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMobile, setIsMobile] = useState(() => 

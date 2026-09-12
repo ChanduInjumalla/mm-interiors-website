@@ -77,6 +77,21 @@
   transform: none;
 }
 
+/* Mobile devices: Always show content immediately so nothing is hidden or delayed during scroll */
+@media (max-width: 768px) {
+  .scroll-reveal,
+  .scroll-reveal-item,
+  .scroll-reveal--left,
+  .scroll-reveal--right,
+  .scroll-reveal--scale,
+  .scroll-reveal--fade {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 /* Accessibility: Skip all animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal,

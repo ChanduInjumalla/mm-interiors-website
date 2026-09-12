@@ -13,8 +13,11 @@ export function useScrollReveal(options = {}) {
     const element = ref.current;
     if (!element) return;
 
-    // Respect reduced-motion preference — show immediately
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // On mobile devices (<=768px) or reduced-motion preference — show immediately
+    if (
+      (typeof window !== 'undefined' && window.innerWidth <= 768) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       setIsVisible(true);
       element.classList.add('is-visible');
       return;
@@ -74,7 +77,10 @@ export function useScrollRevealAll(options = {}) {
     const container = containerRef.current;
     if (!container) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (
+      (typeof window !== 'undefined' && window.innerWidth <= 768) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       container.querySelectorAll('.scroll-reveal-item').forEach((el) => {
         el.classList.add('is-visible');
       });
